@@ -11,6 +11,7 @@ end
 
 Rails.application.routes.draw do
 
+  resources :games
   namespace :admin do
     get 'login', to: 'sessions#new', as: :login
     post 'login', to: 'sessions#create'

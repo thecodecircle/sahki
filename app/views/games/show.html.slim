@@ -1,0 +1,36 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @game.name
+p
+  strong Description:
+  = @game.description
+p
+  strong How To Play:
+  = @game.how_to
+p
+  strong Min players:
+  = @game.min_players
+p
+  strong Max players:
+  = @game.max_players
+p
+  strong Hearts:
+  = @game.hearts
+p
+  strong Shares:
+  = @game.shares
+p
+  strong Status:
+  = @game.status
+p
+  strong Suggested name:
+  = @game.suggested_name
+p
+  strong Suggested phone:
+  = @game.suggested_phone
+
+=> link_to 'Edit', edit_game_path(@game)
+'|
+=< link_to 'Back', games_path
