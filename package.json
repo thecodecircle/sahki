@@ -1,0 +1,26 @@
+{
+  "name": "sahki",
+  "private": true,
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.9.0",
+    "@rails/actioncable": "^6.0.0",
+    "@rails/activestorage": "^6.0.0",
+    "@rails/ujs": "^6.0.0",
+    "@rails/webpacker": "4.2.2",
+    "admin-lte": "^3.0.0-beta.1",
+    "bootstrap": "^4.3.1",
+    "daterangepicker": "^3.0.5",
+    "expose-loader": "^1.0.0",
+    "jquery": "^3.3.1",
+    "moment-timezone": "^0.5.31",
+    "popper.js": "^1.14.7",
+    "rails-erb-loader": "^5.5.2",
+    "tempusdominus-core": "^5.0.3",
+    "turbolinks": "^5.2.0",
+    "webpack": "^4.0.0"
+  },
+  "version": "0.1.0",
+  "devDependencies": {
+    "webpack-dev-server": "^3.11.0"
+  }
+}
