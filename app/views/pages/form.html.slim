@@ -21,11 +21,12 @@
 
 javascript:
 	$(function() {
+		Cookies.set('tags', ["5 דקות"] );
 		console.log( $('#get_game').html() );
 		$.ajax({
 		 type: "GET",
 		 dataType: "json",
-		 data: { tags: "5 דקות" },
+		 data: { tags: Cookies.getJSON('tags') },
 		 url: "/filter_tag",
 		 success: function(data){
 			 console.log(data[0].name);

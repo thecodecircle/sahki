@@ -82,9 +82,10 @@ class GamesController < ApplicationController
 
   def filter_tag
     puts "******************* params[:tags] => #{params[:tags]} *********************"
-    tag_array = params[:tags]
+    tag_array = JSON.parse(cookies[:tags])
     @games = Game.tag_filter(tag_array)
-    puts "******************* Filtering... *********************"
+    @games = Game.rank_games(@games)
+    puts "******************* Filtering and sorting... *********************"
     # redirect_to page_path('form')
 
     respond_to do |format|
