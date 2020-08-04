@@ -8,7 +8,7 @@ p
   = @game.description
 p
   strong How To Play:
-  = @game.how_to
+  = sanitize @game.how_to.to_s
 p
   strong Min players:
   = @game.min_players
@@ -30,6 +30,18 @@ p
 p
   strong Suggested phone:
   = @game.suggested_phone
+p
+  strong Length:
+  = @game.length_list
+p
+  strong Amount:
+  = @game.amount_list
+p
+  strong Style:
+  = @game.style_list
+p
+  strong Method:
+  = @game.method_list
 
 => link_to 'Edit', edit_game_path(@game)
 '|
