@@ -10,10 +10,12 @@ $tertiary: #22FF88
 
 body
 	font-family: 'Suez One', serif
-	overflow: hidden
+	// overflow: hidden
 
 .h-100v
 	height: 100vh
+.h-12v
+	height: 12vh
 
 .h-1
 	height: 10vh
@@ -68,14 +70,23 @@ body
 	box-shadow: -3px 3px 0px 3px #D2BD00
 
 .form-games
-	transform: translate(0, -12vh)
+	// transform: translate(0, -12vh)
+	position: absolute
+	bottom: 0
+	width: 100%
 	box-shadow: 0px -5px 9px 1px #00000055
+	border-radius: 20px 20px 0 0
 
 .games-move-up
-	transform: translate(0, -88vh)
+	height: 88vh
+	// transform: translate(0, -88vh)
+	border-radius: 20px 20px 0 0
+
 .question-move-up
 	transform: translate(0, -20vh)
-
+.game-attrs
+	font-size: 2rem
+	
 // .move-up
 // 	animation: move-up 4s
 
@@ -89,6 +100,3 @@ body
 // 		transform: rotate(0deg)
 //   100%
 // 		transform: rotate(360deg)
-
-.form-rounded
-	border-radius: 20px

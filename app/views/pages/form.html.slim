@@ -3,7 +3,7 @@
 		.d-flex.w-full.justify-content-between.align-items-center
 			div
 			.form-logo
-				/ = image_tag "temp-logo.svg"
+				 = image_tag "temp-logo.svg"
 			= link_to root_path do
 				i.form-back.fas.fa-arrow-right.fa-2x.icon-secondary
 
@@ -14,14 +14,14 @@
 			.answer.bg-secondary.rounded.m-4.d-flex.justify-content-center.align-items-center 15 דקות
 			.answer.bg-secondary.rounded.m-4.d-flex.justify-content-center.align-items-center 20+ דקות
 
-.form-games.bg-primary.h-100v.form-rounded.text-center
+.form-games.bg-primary.h-12v.form-rounded.text-center.text-white
 	i.fas.fa-grip-lines.fa-2x.grip
-	h2.pt-2#get_game נקניק
+	h2.game-name.pt-2#get_game נקניק
+	.flex.justify-content-center.w-100.align-items-center.flex-column
+		.description.game-attrs.w-75.text-right#get_description.d-none תיאור ממש טוב למשחק שנקרא נקניק
+		.how-to.game-attrs.w-75.text-right#get_how_to.d-none איך משחקים
 
-.draggable.h-100v#drag
-	p drag me
-
-
+.append
 javascript:
 	$(function() {
 		console.log( $('#get_game').html() );
@@ -31,8 +31,16 @@ javascript:
 		 data: { tags: "5 דקות" },
 		 url: "/filter_tag",
 		 success: function(data){
-			 console.log(data[0].name);
+			 // console.log(data);
 			 $('#get_game').html(data[0].name)
+			 $('#get_description').html(data[0].description)
+			 $('#get_how_to').html(data[0].how_to)
+			 $.each(data, function( index, game ) {
+				  console.log(game.name);
+					$('.append').append(
+						"<div class='form-games bg-primary h-12v form-rounded text-center text-white games-move-up'><i class='fas fa-grip-lines fa-2x grip'></i><h2 class='game-name pt-2 mt-2 display-4' id='get_game'>" + game.name + "</h2><div class='flex justify-content-center w-100 align-items-center flex-column'><div class='description game-attrs w-75 text-right' id='get_description' style='display: inline-block;'>" + game.description + "</div><div class='how-to game-attrs w-75 text-right' id='get_how_to' style='display: inline-block;'>איך משחקים</div></div></div>"
+					)
+				});
 			 // $('#show_hearts_' + heart_id).html(data.hearts)
 		 }
 	  })
@@ -41,5 +49,6 @@ javascript:
 		console.log("animate");
 		$(".form-games").toggleClass('games-move-up')
 		$(".form").toggleClass('question-move-up')
-
+		$(".game-attrs").toggleClass('d-none').css('display', 'inline-block');
+		$(".game-name").toggleClass('mt-2 display-4')
 	});
