@@ -1,6 +1,7 @@
 class Game < ApplicationRecord
   has_rich_text :how_to
   enum status: [ :pending, :approved ]
+  acts_as_taggable_on :lengths, :amounts, :styles, :methods
 
   validates :name,          presence: true
   validates :description,   presence: true
