@@ -21,9 +21,10 @@ html
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     = javascript_pack_tag 'ga', 'data-turbolinks-track': 'reload'
     = favicon_link_tag asset_pack_path("media/images/favicon.ico")
-		= stylesheet_link_tag '//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/le-frog/jquery-ui.min.css'
+		/ = stylesheet_link_tag '//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/le-frog/jquery-ui.min.css'
 		/ script src="jquery.ui.touch-punch.min.js"
 		/ script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"
+    script src = "https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"
   body class=body_class
     main
       div
