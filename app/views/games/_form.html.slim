@@ -5,7 +5,8 @@
   .form-inputs
     = f.input :name
     = f.input :description
-    = f.input :how_to
+    .label How to play:
+    = f.rich_text_area :how_to
     = f.input :min_players
     = f.input :max_players
     = f.input :hearts
@@ -18,3 +19,13 @@
 
   .form-actions
     = f.button :submit
+
+    .helloy Hi
+
+    = form_with model: @game do |form|
+      .field
+        = form.label :how_to
+        = form.rich_text_area :how_to
+
+javascript:
+  $(".helloy").addClass("hell")

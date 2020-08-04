@@ -12,13 +12,16 @@ environment.plugins.append('Provide', new webpack.ProvidePlugin({
 
 environment.loaders.append('expose', {
     test: require.resolve('jquery'),
-    use: [{
+    rules: [
+      {
+        test: require.resolve('jquery'),
         loader: 'expose-loader',
-        options: '$'
-    }, {
-        loader: 'expose-loader',
-        options: 'jQuery',
-    }]
+        options: {
+          // For `underscore` library, it can be `_.map map` or `_.map|map`
+          exposes: 'jquery',
+        },
+      },
+    ],
 })
 
 
