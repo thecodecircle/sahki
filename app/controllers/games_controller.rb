@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :edit, :update, :destroy, :heart_it, :share_it]
+  before_action :set_game, only: [:show, :edit, :update, :destroy, :heart_it, :share_it, :approve_game]
 
   # GET /games
   # GET /games.json
@@ -72,6 +72,25 @@ class GamesController < ApplicationController
     @game.update(shares: @game.shares + 1)
     puts "******************* Add shares to #{@game.shares} *********************"
     redirect_to games_path
+  end
+
+  def approve_game
+    @game.approved!
+    puts "******************* Approved #{@game.name} *********************"
+    redirect_to games_path
+  end
+
+  def filter_tag
+    puts "******************* params[:tags] => #{params[:tags]} *********************"
+    tag_array = params[:tags]
+    @games = Game.tag_filter(tag_array)
+    puts "******************* Filtering... *********************"
+    # redirect_to page_path('form')
+
+    respond_to do |format|
+      format.html { redirect_to page_path('form'), notice: 'Filter.' }
+      format.json { render json: @games }
+    end
   end
 
   private
