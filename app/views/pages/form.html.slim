@@ -1,4 +1,3 @@
-
 .form.bg-primary.h-100v
 	.containe.text-center.d-flex.flex-column.p-0
 		.d-flex.w-full.justify-content-between.align-items-center
@@ -19,8 +18,14 @@
 	i.fas.fa-grip-lines.fa-2x.grip
 	h2.pt-2 סבבים
 
+.draggable.h-100v#drag
+	p drag me
+
+
 javascript:
 	$(".grip").click(function(event) {
 		console.log("animate");
-		$(".form-games").addClass('move-up')
+		$(".form-games").toggleClass('games-move-up')
+		$(".form").toggleClass('question-move-up')
+
 	});
