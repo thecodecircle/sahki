@@ -20,11 +20,11 @@ class Game < ApplicationRecord
       scores[game.name.to_sym] = game.hearts + (game.shares * 2)
     end
     # scores.select{|key, hash| hash == scores.values.max }
-    scores.sort_by {|k, v| -v}
+    sorted_scores = scores.sort_by {|k, v| -v}
     game_list = []
-    scores.each_with_index do |(key, value), index|
+    sorted_scores.each_with_index do |(key, value), index|
       puts "****************** key: #{key}, value: #{value} **********************"
-      game_list[index] = Game.find_by(name: scores[key])
+      game_list[index] = Game.find_by(name: key)
     end
     game_list
   end
