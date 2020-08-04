@@ -23,15 +23,51 @@ table
         td = game.description
         td = game.min_players
         td = game.max_players
-        td = game.hearts
-        td = game.shares
+        td id="show_hearts_#{game.id}" = game.hearts
+        td id="show_shares_#{game.id}" = game.shares
         td = game.status
         td = game.suggested_name
         td = game.suggested_phone
         td = link_to 'Show', game
         td = link_to 'Edit', edit_game_path(game)
         td = link_to 'Destroy', game, data: { confirm: 'Are you sure?' }, method: :delete
+        td = link_to 'Heart', heart_it_path(id: game), class: "heart", id: "heart-#{game.id}", remote: true
+        td = link_to 'Share', share_it_path(id: game), class: "share", id: "share-#{game.id}", remote: true
 
 br
 
 = link_to 'New Game', new_game_path
+
+javascript:
+    $('.heart').on('ajax:success', function(e, data, status, xhr){
+      console.log("yess")
+      var heart_arr = $(this).attr('id').split("-")
+      var heart_id = heart_arr[1]
+      $.ajax({
+       type: "GET",
+       dataType: "json",
+       url: "/games/" + heart_id,
+       success: function(data){
+         console.log(data.hearts);
+         $('#show_hearts_' + heart_id).html(data.hearts)
+       }
+   })
+    }).on('ajax:error',function(e, xhr, status, error){
+      console.log("no")
+    });
+    $('.share').on('ajax:success', function(e, data, status, xhr){
+      console.log("yess")
+      var share_arr = $(this).attr('id').split("-")
+      var share_id = share_arr[1]
+      $.ajax({
+       type: "GET",
+       dataType: "json",
+       url: "/games/" + share_id,
+       success: function(data){
+         console.log(data.shares);
+         $('#show_shares_' + share_id).html(data.shares)
+       }
+   })
+    }).on('ajax:error',function(e, xhr, status, error){
+      console.log("no")
+    });

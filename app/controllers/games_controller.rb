@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :edit, :update, :destroy]
+  before_action :set_game, only: [:show, :edit, :update, :destroy, :heart_it, :share_it]
 
   # GET /games
   # GET /games.json
@@ -10,6 +10,7 @@ class GamesController < ApplicationController
   # GET /games/1
   # GET /games/1.json
   def show
+    respond_to :json, :html
   end
 
   # GET /games/new
@@ -59,6 +60,18 @@ class GamesController < ApplicationController
       format.html { redirect_to games_url, notice: 'Game was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def heart_it
+    @game.update(hearts: @game.hearts + 1)
+    puts "******************* Add hearts to #{@game.hearts} *********************"
+    redirect_to games_path
+  end
+
+  def share_it
+    @game.update(shares: @game.shares + 1)
+    puts "******************* Add shares to #{@game.shares} *********************"
+    redirect_to games_path
   end
 
   private
