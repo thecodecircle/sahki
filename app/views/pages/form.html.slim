@@ -1,0 +1,26 @@
+
+.form.bg-primary.h-100v
+	.containe.text-center.d-flex.flex-column.p-0
+		.d-flex.w-full.justify-content-between.align-items-center
+			div
+			.form-logo
+				= image_tag "temp-logo.svg"
+			= link_to root_path do
+				i.form-back.fas.fa-arrow-right.fa-2x.icon-secondary
+
+		h1.question ?השאלה הראשונה
+		.answers.d-flex.flex-wrap.w-100.justify-content-center
+			.answer.bg-secondary.rounded.m-4.d-flex.justify-content-center.align-items-center תשובה
+			.answer.bg-secondary.rounded.m-4.d-flex.justify-content-center.align-items-center תשובה
+			.answer.bg-secondary.rounded.m-4.d-flex.justify-content-center.align-items-center תשובה
+			.answer.bg-secondary.rounded.m-4.d-flex.justify-content-center.align-items-center תשובה
+
+.form-games.bg-primary.h-100v.form-rounded.text-center
+	i.fas.fa-grip-lines.fa-2x.grip
+	h2.pt-2 סבבים
+
+javascript:
+	$(".grip").click(function(event) {
+		console.log("animate");
+		$(".form-games").addClass('move-up')
+	});

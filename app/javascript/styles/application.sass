@@ -2,6 +2,15 @@
 
 @import 'home'
 @import 'trix/dist/trix'
+@import url('https://fonts.googleapis.com/css2?family=Suez+One&display=swap')
+
+$primary: linear-gradient(180deg, #C260FF 0%, #6000CF 100%)
+$secondary: #FFE818
+$tertiary: #22FF88
+
+body
+	font-family: 'Suez One', serif
+	overflow: hidden
 
 .h-100v
 	height: 100vh
@@ -20,7 +29,12 @@
 .home-logo
 	padding-top: 20vh
 	margin-bottom: 10vh
-
+.form-logo
+	padding-top: 1vh
+	margin-bottom: 2vh
+	img
+		height: 10vh
+#22FF88
 
 .home-app-name
 	margin-bottom: 10vh
@@ -31,3 +45,38 @@
 
 .home-plus-search
 	bottom: 7vh
+
+.bg-primary
+	background: $primary
+
+.bg-secondary
+	background: $secondary !important
+.bg-tertiary
+	background: $tertiary
+.icon-secondary
+	color: $secondary
+
+.form-back
+	transform: translate(-50%, 0)
+
+.question
+	margin-top: 10vh
+
+.answer
+	width: 30vw
+	height: 30vw
+	box-shadow: -3px 3px 0px 3px #D2BD00
+
+.form-games
+	transform: translate(0, -12vh)
+	box-shadow: 0px -5px 9px 1px #00000055
+
+.move-up
+	animation-name: move-up
+  animation-duration: 4s
+@keyframes move-up
+  from {transform: translate(0, -12vh)}
+  to {transform: translate(0, -88vh)}
+
+.form-rounded
+	border-radius: 20px
