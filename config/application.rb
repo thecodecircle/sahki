@@ -23,9 +23,9 @@ module Sahki
     config.generators.assets = false
     config.generators.helper = false
 
-    config.time_zone = 'Beijing'
-    config.i18n.available_locales = [:en, :'zh-CN']
-    config.i18n.default_locale = :'zh-CN'
+    config.time_zone = 'Jerusalem'
+    config.i18n.available_locales = [:en, :'he']
+    config.i18n.default_locale = :'he'
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
 
