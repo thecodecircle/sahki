@@ -1,15 +1,32 @@
-.container.text-center
-  p
-  h1 Hello World
-  hr
-  h3 You are roading on Rails...
-  br
-  br
-  br
-  br
-  p.text-muted
-    ' Built with
-    span dao42/rails-template
-    | !
+.bg-primary.h-100v
+	.container.text-center.d-flex.flex-column.p-0
+		.home-logo
+			= image_tag "temp-logo.svg"
+			/ img.col logo
+		.home-app-name
+			h1.col שחקי
+		/ .home-buttons.d-flex.flex-row.w-100
+		.home-play.d-flex.w-100.justify-content-center.position-absolute
+			.rounded-circle.bg-secondary.w-2.h-2.d-flex.justify-content-center.align-items-center
+				i.fas.fa-play.fa-3x
+		.home-plus-search.d-flex.w-100.justify-content-around.position-absolute
+			.rounded-circle.bg-secondary.w-1.h-1.d-flex.justify-content-center.align-items-center
+				i.fas.fa-plus.fa-2x
+			.rounded-circle.bg-secondary.w-1.h-1.d-flex.justify-content-center.align-items-center
+				i.fas.fa-search.fa-2x
 
-  = link_to 'About Page', page_path('about')
+
+/ p
+/ h1 Hello World
+/ hr
+/ h3 You are roading on Rails...
+/ br
+/ br
+/ br
+/ br
+/ p.text-muted
+/   ' Built with
+/   span dao42/rails-template
+/   | !
+/
+/ = link_to 'About Page', page_path('about')
