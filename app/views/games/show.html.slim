@@ -43,6 +43,10 @@ p
   strong Method:
   = @game.method_list
 
+= link_to "Approve game", approve_game_path(id: @game.id)
+br
+br
+
 => link_to 'Edit', edit_game_path(@game)
 '|
 =< link_to 'Back', games_path

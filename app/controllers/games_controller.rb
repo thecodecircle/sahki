@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :edit, :update, :destroy, :heart_it, :share_it]
+  before_action :set_game, only: [:show, :edit, :update, :destroy, :heart_it, :share_it, :approve_game]
 
   # GET /games
   # GET /games.json
@@ -71,6 +71,12 @@ class GamesController < ApplicationController
   def share_it
     @game.update(shares: @game.shares + 1)
     puts "******************* Add shares to #{@game.shares} *********************"
+    redirect_to games_path
+  end
+
+  def approve_game
+    @game.approved!
+    puts "******************* Approved #{@game.name} *********************"
     redirect_to games_path
   end
 

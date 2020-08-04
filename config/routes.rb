@@ -29,4 +29,5 @@ Rails.application.routes.draw do
 
   get 'heart_it', to: "games#heart_it"
   get 'share_it', to: "games#share_it"
+  get 'approve_game', to: "games#approve_game"
 end
