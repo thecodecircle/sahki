@@ -19,13 +19,3 @@
 
   .form-actions
     = f.button :submit
-
-    .helloy Hi
-
-    = form_with model: @game do |form|
-      .field
-        = form.label :how_to
-        = form.rich_text_area :how_to
-
-javascript:
-  $(".helloy").addClass("hell")

@@ -8,7 +8,7 @@ p
   = @game.description
 p
   strong How To Play:
-  = @game.how_to
+  = sanitize @game.how_to.to_s
 p
   strong Min players:
   = @game.min_players
