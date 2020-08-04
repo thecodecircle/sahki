@@ -80,6 +80,19 @@ class GamesController < ApplicationController
     redirect_to games_path
   end
 
+  def filter_tag
+    puts "******************* params[:tags] => #{params[:tags]} *********************"
+    tag_array = params[:tags]
+    @games = Game.tag_filter(tag_array)
+    puts "******************* Filtering... *********************"
+    # redirect_to page_path('form')
+
+    respond_to do |format|
+      format.html { redirect_to page_path('form'), notice: 'Filter.' }
+      format.json { render json: @games }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_game

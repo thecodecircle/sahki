@@ -9,4 +9,24 @@ class Game < ApplicationRecord
   validates :min_players,   numericality: { only_integer: true, greater_than: 0 }
   validates :max_players,   numericality: { only_integer: true, greater_than: 0 }
   validates :status,        inclusion: { in: statuses.keys }
+
+  def self.tag_filter(filter_array)
+    self.tagged_with(filter_array)
+  end
+
+  def self.rank_games(games)
+    scores = Hash.new
+    games.each do |game|
+      scores[game.name.to_sym] = game.hearts + (game.shares * 2)
+    end
+    # scores.select{|key, hash| hash == scores.values.max }
+    scores.sort_by {|k, v| -v}
+    game_list = []
+    scores.each_with_index do |(key, value), index|
+      puts "****************** key: #{key}, value: #{value} **********************"
+      game_list[index] = Game.find_by(name: scores[key])
+    end
+    game_list
+  end
+
 end
