@@ -26,4 +26,7 @@ Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq', constraints: AdminConstraint.new
   #mount ActionCable.server => '/cable'
   root to: 'home#index'
+
+  get 'heart_it', to: "games#heart_it"
+  get 'share_it', to: "games#share_it"
 end
