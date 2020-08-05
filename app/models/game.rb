@@ -26,7 +26,7 @@ class Game < ApplicationRecord
       puts "****************** key: #{key}, value: #{value} **********************"
       game_list[index] = Game.find_by(name: key)
     end
-    game_list
+    game_list.first(20)
   end
 
 end
