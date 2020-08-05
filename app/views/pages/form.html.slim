@@ -14,18 +14,147 @@
 			.answer.bg-secondary.rounded.m-4.d-flex.justify-content-center.align-items-center 15 דקות
 			.answer.bg-secondary.rounded.m-4.d-flex.justify-content-center.align-items-center 20+ דקות
 
-.form-games.bg-primary.h-12v.form-rounded.text-center.text-white
-	i.fas.fa-grip-lines.fa-2x.grip
-	h2.game-name.pt-2#get_game נקניק
-	.flex.justify-content-center.w-100.align-items-center.flex-column
-		.description.game-attrs.w-75.text-right#get_description.d-none תיאור ממש טוב למשחק שנקרא נקניק
-		.how-to.game-attrs.w-75.text-right#get_how_to.d-none איך משחקים
+.form-games.bg-primary.h-12v.form-rounded.text-center.text-white.resizable
+	.game-card data-next="" data-prev=""
+		i.fas.fa-grip-lines.fa-2x.grip
+		h2.game-name.pt-2#get_game נקניק
+		.flex.justify-content-center.w-100.align-items-center.flex-column
+			.description.game-attrs.w-75.text-right#get_description.d-none תיאור ממש טוב למשחק שנקרא נקניק
+			.how-to.game-attrs.w-75.text-right#get_how_to.d-none איך משחקים
 
-.append
+/ .append
+
+/ #slider.swipe.h-100v
+/   .swipe-wrap
+/     .h-1.w-1.bg-success
+/     .h-1.w-1.bg-danger
+/     .h-1.w-1.bg-warning
+/ .h-100v
+/ 	.draggable Draggable Element
 javascript:
+	// import Swipe from 'swipejs'
+	// const position = { x: 0, y: 0 }
+	//
+	// interact('.draggable').draggable({
+	// 	startAxis: 'y',
+  // 	lockAxis: 'start',
+	//   listeners: {
+	//     start (event) {
+	//       console.log(event.type, event.target)
+	//     },
+	//     move (event) {
+	//       position.x += event.dx
+	//       position.y += event.dy
+	//
+	//       event.target.style.transform =
+	//         `translate(${position.x}px, ${position.y}px)`
+	//     },
+	//   }
+	//
+	// })bac
+	var up_or_down
+	var original_question = $(".question").offset().top
+	var original_top = $(".form-games").offset().top
+	var original_font_size = $(".form-back").css('font-size')
+	var original_logo_position = $(".form-logo").children('img').offset().top
+	interact('.resizable')
+	  .resizable({
+	    edges: {
+	      top   : ".grip",
+	      left  : false,
+	      bottom: false,
+	      right : false
+	    },
+	  })
+	  .on('resizemove', event => {
+			// console.log($(event.target).height());
+			if ($(event.target).height() > $(document).height()/5) {
+				$(".game-attrs").removeClass('d-none').css('display', 'inline-block').addClass('transparent');
+				var opacity
+				if (parseInt($(event.target).height()/$(document).height()*100) >= 70) {
+					opacity = 1
+				}else {
+					opacity = $(event.target).height()/$(document).height()
+
+				}
+				$(".game-attrs").css('opacity', opacity);
+			}else {
+				$(".game-attrs").addClass('d-none')
+
+			}
+			let { x, y } = event.target.dataset
+
+
+	    x = parseFloat(x) || 0
+	    y = parseFloat(y) || 0
+
+			var top = $(event.target).offset().top
+			var question = $(".question").offset().top + $(".question").height()
+			// console.log("up_or_down: " + up_or_down);
+			// console.log("top: " + top);
+			var up
+			if (top > up_or_down) {
+				up = false
+			}else if (top < up_or_down) {
+				up = true
+
+			}
+			console.log($(".form-back").css('font-size'));
+			if (top <= question + 40 && up) {
+				$(".question").offset({top: $(".question").offset().top - 4})
+				$(".form-logo").children('img').height(($(".form-logo").children('img').height() - 4))
+				if ($(".form-logo").children('img').height() <= $(document).height()/15 ) {
+					// console.log("tiny");
+					$(".form-logo").children('img').offset({top: $(".form-logo").children('img').offset().top - 2})
+					$(".form-back").css('font-size', parseInt($(".form-back").css('font-size')) - 2 + 'px')
+				}
+				// console.log($(".form-logo").children('img').height);
+			}else {
+				if ($(".question").offset().top == original_question) {
+					$(".question").offset({top: $(".question").offset().top + 4})
+
+				}
+				$(".form-logo").children('img').height(($(".form-logo").children('img').height() + 4))
+				if ($(".form-logo").children('img').height() <= $(document).height()/15 ) {
+					// console.log("tiny");
+					$(".form-logo").children('img').offset({top: $(".form-logo").children('img').offset().top + 2})
+
+					$(".form-back").css('font-size', parseInt($(".form-back").css('font-size')) + 2 + 'px')
+
+			}
+
+			}
+			// console.log(question);
+			// if (event.target) {
+			// 	console.log();
+			// }
+	    Object.assign(event.target.style, {
+	      width: `${event.rect.width}px`,
+	      height: `${event.rect.height}px`,
+	      transform: `translate(${event.deltaRect.left}px, ${event.deltaRect.top}px)`
+	    })
+	    Object.assign(event.target.dataset, { x, y })
+			if (parseInt($(event.target).offset().top) % 4 == 0) {
+				up_or_down = $(event.target).offset().top
+			}
+	  })
+
+	var element = document.getElementById('slider');
+	window.mySwipe = new Swipe(element, {
+	  startSlide: 1,
+	  auto: false,
+	  draggable: true,
+	  autoRestart: true,
+	  continuous: true,
+	  disableScroll: true,
+	  stopPropagation: true,
+	  callback: function(index, element) {},
+	  transitionEnd: function(index, element) {}
+	});
+	var games
 	$(function() {
 		Cookies.set('tags', ["5 דקות"] );
-		console.log( $('#get_game').html() );
+		// console.log( $('#get_game').html() );
 		$.ajax({
 		 type: "GET",
 		 dataType: "json",
@@ -33,23 +162,25 @@ javascript:
 		 url: "/filter_tag",
 		 success: function(data){
 			 // console.log(data);
+			 $.each(data, function(index, el) {
+
+			 });
 			 $('#get_game').html(data[0].name)
+			 $('.game-card').attr('data-next', 1)
 			 $('#get_description').html(data[0].description)
 			 $('#get_how_to').html(data[0].how_to)
-			 $.each(data, function( index, game ) {
-				  console.log(game.name);
-					$('.append').append(
-						"<div class='form-games bg-primary h-12v form-rounded text-center text-white games-move-up'><i class='fas fa-grip-lines fa-2x grip'></i><h2 class='game-name pt-2 mt-2 display-4' id='get_game'>" + game.name + "</h2><div class='flex justify-content-center w-100 align-items-center flex-column'><div class='description game-attrs w-75 text-right' id='get_description' style='display: inline-block;'>" + game.description + "</div><div class='how-to game-attrs w-75 text-right' id='get_how_to' style='display: inline-block;'>איך משחקים</div></div></div>"
-					)
-				});
-			 // $('#show_hearts_' + heart_id).html(data.hearts)
-		 }
-	  })
+			 define_games(data)
+
+	  }})
 	});
-	$(".grip").click(function(event) {
-		console.log("animate");
-		$(".form-games").toggleClass('games-move-up')
-		$(".form").toggleClass('question-move-up')
-		$(".game-attrs").toggleClass('d-none').css('display', 'inline-block');
-		$(".game-name").toggleClass('mt-2 display-4')
-	});
+	function define_games(data) {
+		games = data
+	}
+	// next_game = games.find(game => game.id = 3)
+	// $(".grip").click(function(event) {
+	// 	console.log("animate");
+	// 	$(".form-games").toggleClass('games-move-up')
+	// 	$(".form").toggleClass('question-move-up')
+	// 	$(".game-attrs").toggleClass('d-none').css('display', 'inline-block');
+	// 	$(".game-name").toggleClass('mt-2 display-4')
+	// })

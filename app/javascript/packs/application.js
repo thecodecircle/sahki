@@ -1,10 +1,11 @@
 import 'styles/application'
 import '../js/base'
-
 require("trix")
 require("@rails/actiontext")
 window.jQuery = $;
 window.$ = $;
+// import Swipe from 'swipejs'
+// const Swipe = require("swipejs")
 // require("jquery-ui")
 //
 // import '../js/jquery.ui.touch-punch.js'

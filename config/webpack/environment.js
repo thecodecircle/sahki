@@ -7,7 +7,7 @@ environment.plugins.append('Provide', new webpack.ProvidePlugin({
   $: 'jquery',
   jQuery: 'jquery',
   'window.jQuery': 'jquery',
-  Popper: ['popper.js', 'default'],
+  Popper: ['popper.js', 'default']
 }))
 
 environment.loaders.append('expose', {

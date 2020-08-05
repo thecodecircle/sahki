@@ -6,7 +6,10 @@ import RailsUjs from '@rails/ujs'
 import Turbolinks from 'turbolinks'
 import * as ActiveStorage from '@rails/activestorage'
 import 'channels'
-
+import Swipe from 'swipejs'
+global.Swipe = Swipe
+import interact from 'interactjs'
+global.interact = interact
 const images = require.context('images', true)
 const imagePath = (name) => images(name, true)
 

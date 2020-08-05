@@ -18,6 +18,7 @@
     "moment-timezone": "^0.5.31",
     "popper.js": "^1.14.7",
     "rails-erb-loader": "^5.5.2",
+    "swipejs": "^2.2.18",
     "tempusdominus-core": "^5.0.3",
     "trix": "^1.2.0",
     "turbolinks": "^5.2.0",

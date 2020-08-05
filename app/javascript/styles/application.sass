@@ -8,8 +8,11 @@ $primary: linear-gradient(180deg, #C260FF 0%, #6000CF 100%)
 $secondary: #FFE818
 $tertiary: #22FF88
 
+*
+	text-shadow: none
+
 body
-	font-family: 'Suez One', serif
+	font-family: 'Suez One', serif !important
 	// overflow: hidden
 
 .h-100v
@@ -36,6 +39,8 @@ body
 	margin-bottom: 2vh
 	img
 		height: 10vh
+		max-height: 10vh
+		min-height: 5vh
 #22FF88
 
 .home-app-name
@@ -76,6 +81,8 @@ body
 	width: 100%
 	box-shadow: 0px -5px 9px 1px #00000055
 	border-radius: 20px 20px 0 0
+	min-height: 12vh
+	max-height: 85vh
 
 .games-move-up
 	height: 88vh
@@ -86,7 +93,7 @@ body
 	transform: translate(0, -20vh)
 .game-attrs
 	font-size: 2rem
-	
+
 // .move-up
 // 	animation: move-up 4s
 
@@ -100,3 +107,23 @@ body
 // 		transform: rotate(0deg)
 //   100%
 // 		transform: rotate(360deg)
+// * Set the background image sources */
+.swipe
+  overflow: hidden
+  visibility: hidden
+  position: relative
+
+.swipe-wrap
+  overflow: hidden
+  position: relative
+
+.swipe-wrap > div
+  float: left
+  width: 100%
+  position: relative
+.draggable
+  touch-action: none
+  user-select: none
+.resizable
+  touch-action: none
+  user-select: none
