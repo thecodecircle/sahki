@@ -1,4 +1,4 @@
-.form.bg-primary.h-100v
+.form.bg-primary.h-100v.d-none
 	.containe.text-center.d-flex.flex-column.p-0
 		.d-flex.w-full.justify-content-between.align-items-center
 			div
@@ -14,7 +14,7 @@
 			.answer.bg-secondary.rounded.m-4.d-flex.justify-content-center.align-items-center 15 דקות
 			.answer.bg-secondary.rounded.m-4.d-flex.justify-content-center.align-items-center 20+ דקות
 
-.form-games.bg-primary.h-12v.form-rounded.text-center.text-white.resizable
+.form-games.bg-primary.h-12v.form-rounded.text-center.text-white.resizable.d-none
 	.game-card data-next="" data-prev=""
 		i.fas.fa-grip-lines.fa-2x.grip
 		h2.game-name.pt-2#get_game נקניק
@@ -23,7 +23,8 @@
 			.how-to.game-attrs.w-75.text-right#get_how_to.d-none איך משחקים
 
 / .append
-
+#board
+	.card
 / #slider.swipe.h-100v
 /   .swipe-wrap
 /     .h-1.w-1.bg-success
@@ -32,6 +33,10 @@
 / .h-100v
 / 	.draggable Draggable Element
 javascript:
+
+	let board = document.querySelector('#board')
+
+	let carousel = new Carousel(board)
 	// import Swipe from 'swipejs'
 	// const position = { x: 0, y: 0 }
 	//
@@ -59,6 +64,7 @@ javascript:
 	var original_logo_position = $(".form-logo").children('img').offset().top
 	interact('.resizable')
 	  .resizable({
+			inertia: true,
 	    edges: {
 	      top   : ".grip",
 	      left  : false,

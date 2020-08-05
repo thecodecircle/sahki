@@ -16,3 +16,5 @@ window.$ = $;
 // require('interactjs')
 
 // import interact from 'interactjs'
+
+import '../js/carousel'
