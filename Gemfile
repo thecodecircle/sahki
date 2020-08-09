@@ -47,6 +47,7 @@ gem 'mina-multistage', require: false
 gem 'mina-sidekiq', require: false
 gem 'mina-logs', require: false
 gem 'acts-as-taggable-on', '~> 6.0'
+gem 'hirb'
 
 group :development do
   gem 'rails_apps_testing'

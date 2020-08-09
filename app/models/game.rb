@@ -29,4 +29,20 @@ class Game < ApplicationRecord
     game_list.first(20)
   end
 
+  def self.all_lengths
+    ActsAsTaggableOn::Tag.for_context(:lengths)
+  end
+
+  def self.all_amounts
+    ActsAsTaggableOn::Tag.for_context(:amounts)
+  end
+
+  def self.all_styles
+    ActsAsTaggableOn::Tag.for_context(:styles)
+  end
+
+  def self.all_methods
+    ActsAsTaggableOn::Tag.for_context(:methods)
+  end
+
 end
