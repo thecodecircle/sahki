@@ -62,18 +62,18 @@ javascript:
 		var original_font_size = $(".form-back").css('font-size')
 		var original_logo_position = $(".form-logo").children('img').offset().top
 
-		var element = document.getElementById('slider');
-		window.mySwipe = new Swipe(element, {
-		  startSlide: 1,
-		  auto: false,
-		  draggable: true,
-		  autoRestart: true,
-		  continuous: true,
-		  disableScroll: true,
-		  stopPropagation: true,
-		  callback: function(index, element) {},
-		  transitionEnd: function(index, element) {}
-		});
+		// var element = document.getElementById('slider');
+		// window.mySwipe = new Swipe(element, {
+		//   startSlide: 1,
+		//   auto: false,
+		//   draggable: true,
+		//   autoRestart: true,
+		//   continuous: true,
+		//   disableScroll: true,
+		//   stopPropagation: true,
+		//   callback: function(index, element) {},
+		//   transitionEnd: function(index, element) {}
+		// });
 
 		$(function() {
 			Cookies.set('tags', ["5 דקות"] );
@@ -404,7 +404,7 @@ javascript:
 
 				let board = document.querySelector('#board')
 				let carousel = new Carousel(board)
-				$("body").addClass('overflow-hidden')
+				// $("body").addClass('overflow-hidden')
 				var logo_initial_top = 	parseInt($(".form-logo").children('img').offset().top)
 				interact('.resizable')
 					.resizable({

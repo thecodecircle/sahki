@@ -1,12 +1,32 @@
-= simple_form_for :game do |f|
-  = f.error_notification
-    = f.input :name, as: :hidden
+/ = simple_form_for :game do |f|
+/   = f.error_notification
+/     = f.input :name, as: :hidden
 
-= form_with do
-  - tags = Game.all_lengths
-  h1.question ?כמה זמן יש לך למשחק
-  .answers.d-flex.flex-wrap.w-100.justify-content-center
-    - tags.each_with_index do |tag, i|
-      / .answer.bg-secondary.rounded.m-4.d-flex.justify-content-center.align-items-center = tag.name
-      = radio_button_tag(:tag, tag.name)
-      = label_tag("tag_#{i}".to_sym, tag.name, class: "answer bg-secondary rounded m-4 d-flex justify-content-center align-items-center")
+/ = form_with do
+/   - tags = Game.all_lengths
+/   h1.question ?כמה זמן יש לך למשחק
+/   .answers.d-flex.flex-wrap.w-100.justify-content-center
+/     - tags.each_with_index do |tag, i|
+/       / .answer.bg-secondary.rounded.m-4.d-flex.justify-content-center.align-items-center = tag.name
+/       = radio_button_tag("tag_#{i}".to_sym, tag.name, checked = false,{class: "hidden"})
+/       = label_tag("tag_#{i}".to_sym, tag.name, class: "answer bg-secondary rounded m-4 d-flex justify-content-center align-items-center")
+
+- tags = Game.all_lengths
+h1.question ?כמה זמן יש לך למשחק
+.answers.d-flex.flex-wrap.w-100.justify-content-center
+	- tags.each_with_index do |tag, i|
+		button.answer.bg-secondary.rounded.m-4.d-flex.justify-content-center.align-items-center.border-none value="#{tag.name}"
+			= tag.name
+
+javascript:
+	$(".answer").click(function(event) {
+		Cookies.set('tags', [$(this).val()] )
+		console.log($(this));
+		// console.log($(this).attr("for"));
+		// $("input").attr('name') = $(this).attr("for")
+		console.log($("input[name=" +  $(this).attr("for") + " ]"	));
+		$("input[name=" +  $(this).attr("for") + " ]"	).attr('checked', 'true');
+			$( "form" ).submit();
+	});
+	// $("label").click(function() {
+	// });
