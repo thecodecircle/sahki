@@ -1,8 +1,12 @@
 = simple_form_for :game do |f|
   = f.error_notification
+    = f.input :name, as: :hidden
+
+= form_with do
   - tags = Game.all_lengths
   h1.question ?כמה זמן יש לך למשחק
   .answers.d-flex.flex-wrap.w-100.justify-content-center
-  - tags.each do |tag|
-    .answer.bg-secondary.rounded.m-4.d-flex.justify-content-center.align-items-center = tag.name
-    = f.input :name, as: :hidden
+    - tags.each_with_index do |tag, i|
+      / .answer.bg-secondary.rounded.m-4.d-flex.justify-content-center.align-items-center = tag.name
+      = radio_button_tag(:tag, tag.name)
+      = label_tag("tag_#{i}".to_sym, tag.name, class: "answer bg-secondary rounded m-4 d-flex justify-content-center align-items-center")
