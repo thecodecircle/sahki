@@ -10,6 +10,14 @@ class Game < ApplicationRecord
   validates :max_players,   numericality: { only_integer: true, greater_than: 0 }
   validates :status,        inclusion: { in: statuses.keys }
 
+	after_create do |game|
+		puts "****************************************"
+		puts "init"
+		game.hearts ||= 0
+		game.shares ||= 0
+		game.save
+	end
+
   def self.tag_filter(filter_array)
     self.tagged_with(filter_array)
   end
