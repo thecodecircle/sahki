@@ -2,10 +2,10 @@
 	.containe.text-center.d-flex.flex-column.p-0
 		.d-flex.w-full.justify-content-between.align-items-center
 			div
-			.form-logo
+			.form-logo.to_hide
 				 = image_tag "temp-logo.svg"
 			= link_to root_path do
-				i.form-back.fas.fa-arrow-right.fa-2x.icon-secondary
+				i.form-back.fas.fa-arrow-right.fa-2x.icon-secondary.to_hide
 
 		h1.question ?כמה זמן יש לך למשחק
 		.answers.d-flex.flex-wrap.w-100.justify-content-center
@@ -15,7 +15,7 @@
 			.answer.bg-secondary.rounded.m-4.d-flex.justify-content-center.align-items-center 20+ דקות
 
 .form-games.bg-primary-solid.h-12v.form-rounded.text-center.text-white.resizable
-	.game-card data-next="" data-prev=""
+	.game-card
 		i.fas.fa-grip-lines.fa-2x.grip
 		#board.board-min-height.bg-primary-solid
 		/ h2.game-name.pt-2#get_game
@@ -212,7 +212,7 @@ javascript:
 				}
 
 				onPan(e) {
-					if ($("#board").height() > 500 ) {
+					if ($(".form-games").height() > 300 ) {
 
 
 					// console.log("pan");
@@ -359,9 +359,10 @@ javascript:
 						card.classList.add('card')
 						card.classList.add('bg-primary-solid')
 						card.classList.add('no-border')
+						card.classList.add('text-dark')
 						if (index == 0) card.classList.add('topCard')
 
-						card.innerHTML = "<h2>"+ game.name + "</h2>"
+						card.innerHTML = "<h2 class='game-name'>"+ game.name + "</h2>"
 						card.id = "game-" + (index + 1)
 						if (index == 0) topCardId = 1
 						this.board.insertBefore(card, this.board.firstChild)
@@ -373,6 +374,7 @@ javascript:
 
 						let card = document.createElement('div')
 						// console.log("div");
+						card.classList.add('text-dark')
 						card.classList.add('card')
 						card.classList.add('bg-primary-solid')
 						card.classList.add('no-border')
@@ -407,6 +409,8 @@ javascript:
 
 				let board = document.querySelector('#board')
 				let carousel = new Carousel(board)
+				$("body").addClass('overflow-hidden')
+				var logo_initial_top = 	parseInt($(".form-logo").children('img').offset().top)
 				interact('.resizable')
 					.resizable({
 						inertia:  {
@@ -442,22 +446,44 @@ javascript:
 
 						x = parseFloat(x) || 0
 						y = parseFloat(y) || 0
-						$("#board").height($(".form-games").height())
+						// $("#board").height($(".form-games").height())
+						// var old_top = parseInt($(".card").css("top"))
+						// console.log($(".card").css("top"));
+
+
+						// console.log($(".card").css("top"));
 						var top = $(event.target).offset().top
 						var question = $(".question").offset().top + $(".question").height()
 						// console.log("up_or_down: " + up_or_down);
 						// console.log("top: " + top);
-						if ($(".form-games").height() > 300) {
+						var new_top
+						if (top < 300) {
+							// console.log("top");
+							// $(".card").css("top", "%")
+							$(".card").css("top", "50%")
+						}else {
+							$(".card").css("top", "43%")
+
 						}
 						if (top > up_or_down) {
+							// console.log("down");
 							up = false
 						}else if (top < up_or_down) {
 							up = true
 
 						}
+						if ($(".form-games").height() >= window.innerHeight * 0.80) {
+								$(".question").addClass('question-up')
+							$(".to_hide").hide()
+						}else {
+							$(".question").removeClass('question-up')
+							$(".to_hide").show()
+
+						}
 						console.log($(".form-back").css('font-size'));
-						if (top <= question + 40 && up) {
-							$(".question").offset({top: $(".question").offset().top - 4})
+						// console.log($(".form-logo").children('img').offset().top);
+						if (top <= question + 30 && up) {
+							$(".question").offset({top: $(".question").offset().top - 1})
 							$(".form-logo").children('img').height(($(".form-logo").children('img').height() - 4))
 							if ($(".form-logo").children('img').height() <= $(document).height()/15 ) {
 								// console.log("tiny");
@@ -465,19 +491,25 @@ javascript:
 								$(".form-back").css('font-size', parseInt($(".form-back").css('font-size')) - 2 + 'px')
 							}
 							// console.log($(".form-logo").children('img').height);
-						}else {
+						}else if (up == false) {
 							if ($(".question").offset().top == original_question) {
-								$(".question").offset({top: $(".question").offset().top + 4})
+								$(".question").offset({top: $(".question").offset().top + 3})
 
 							}
-							$(".form-logo").children('img').height(($(".form-logo").children('img').height() + 4))
-							if ($(".form-logo").children('img').height() <= $(document).height()/15 ) {
-								// console.log("tiny");
-								$(".form-logo").children('img').offset({top: $(".form-logo").children('img').offset().top + 2})
+							if ($(".form-logo").children('img').height() < $(document).height() * 0.10) {
+								$(".form-logo").children('img').height(($(".form-logo").children('img').height() + 4))
 
+							}
+							if ($(".form-logo").children('img').offset().top < logo_initial_top ) {
+								// console.log("tiny");
+								$(".form-logo").children('img').offset({top: $(".form-logo").children('img').offset().top + 1})
+
+							}
+							if (parseInt($(".form-back").css('font-size')) < 32) {
+								console.log("true");
 								$(".form-back").css('font-size', parseInt($(".form-back").css('font-size')) + 2 + 'px')
 
-						}
+							}
 
 						}
 						// console.log(question);
@@ -495,5 +527,6 @@ javascript:
 						}
 					})
 
-		// console.log(carousel);
+		console.log("log top:");
+		console.log(	$(".form-logo").children('img').offset().top);
 	});
