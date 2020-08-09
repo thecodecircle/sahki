@@ -22,7 +22,8 @@ class Game < ApplicationRecord
     self.tagged_with(filter_array)
   end
 
-  def self.rank_games(games)
+  def self.rank_games(names)
+    games = Game.tagged_with(names)
     scores = Hash.new
     games.each do |game|
       scores[game.name.to_sym] = game.hearts + (game.shares * 2)

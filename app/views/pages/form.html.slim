@@ -12,7 +12,7 @@
 		- names = []
 		- cookies[:tags].split(",").each do |id|
 			- names << ActsAsTaggableOn::Tag.find(id).name
-		- ranked = Game.rank_games(Game.tagged_with(names)) if names.present?
+		- ranked = Game.rank_games(names) if names.present?
 		p.text-white#game = ranked.first.name if ranked.present?
 
 
@@ -83,7 +83,7 @@ javascript:
 		});
 
 		$(function() {
-			Cookies.set('tags', ["5 דקות"] );
+			// Cookies.set('tags', ["5 דקות"] );
 			// console.log( $('#get_game').html() );
 			$.ajax({
 			 type: "GET",
@@ -91,7 +91,7 @@ javascript:
 			 data: { tags: Cookies.getJSON('tags') },
 			 url: "/filter_tag",
 			 success: function(data){
-				 // console.log(data);
+				 console.log(data);
 				 $.each(data.reverse(), function(index, game) {
 					 // console.log(index);
 					 carousel.push(index, game)

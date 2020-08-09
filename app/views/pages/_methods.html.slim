@@ -21,3 +21,12 @@ javascript:
 		console.log(Cookies.get('tags'));
     $('#render-container').html("#{j render 'pages/styles'}")
 	})
+	$.ajax({
+	 type: "GET",
+	 dataType: "json",
+	 data: { tags: Cookies.getJSON('tags') },
+	 url: "/filter_tag",
+	 success: function(data){
+		 $('#game').html(data[0].name)
+		 console.log("ajax");
+	}})
