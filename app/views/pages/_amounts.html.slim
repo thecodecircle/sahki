@@ -1,8 +1,23 @@
-= simple_form_for :game do |f|
-  = f.error_notification
-  - tags = Game.all_amounts
-  h1.question כמה חניכות ישתתפו במשחק?
-  .answers.d-flex.flex-wrap.w-100.justify-content-center
-  - tags.each do |tag|
-    .answer.bg-secondary.rounded.m-4.d-flex.justify-content-center.align-items-center = tag.name
-    = f.input :name, as: :hidden
+- tags = Game.all_amounts
+h1.question כמה חניכות ישתתפו במשחק?
+.answers.d-flex.flex-wrap.w-100.justify-content-center
+	- tags.each_with_index do |tag, i|
+		button.answer.bg-secondary.rounded.m-4.d-flex.justify-content-center.align-items-center.border-none value="#{tag.id}"
+			= tag.name
+
+javascript:
+	$(".answer").click(function(event) {
+    var new_cookie = Cookies.get('tags')
+    var check_cookie = new_cookie.split(",")
+    if (!check_cookie.includes($(this).val())) {
+      if (new_cookie) {
+        new_cookie += "," + $(this).val()
+      }
+      else {
+        new_cookie = $(this).val()
+      }
+    }
+		Cookies.set('tags', new_cookie)
+		console.log(Cookies.get('tags'));
+    $('#render-container').html("#{j render 'pages/methods'}")
+	})
