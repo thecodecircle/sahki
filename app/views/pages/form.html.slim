@@ -7,12 +7,7 @@
 			= link_to root_path do
 				i.form-back.fas.fa-arrow-right.fa-2x.icon-secondary.to_hide
 
-		h1.question ?כמה זמן יש לך למשחק
-		.answers.d-flex.flex-wrap.w-100.justify-content-center
-			.answer.bg-secondary.rounded.m-4.d-flex.justify-content-center.align-items-center דקות 5
-			.answer.bg-secondary.rounded.m-4.d-flex.justify-content-center.align-items-center 10 דקות
-			.answer.bg-secondary.rounded.m-4.d-flex.justify-content-center.align-items-center 15 דקות
-			.answer.bg-secondary.rounded.m-4.d-flex.justify-content-center.align-items-center 20+ דקות
+		= render 'pages/lengths'
 
 .form-games.bg-primary-solid.h-12v.form-rounded.text-center.text-white.resizable
 	.game-card

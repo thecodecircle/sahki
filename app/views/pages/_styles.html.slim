@@ -1,0 +1,8 @@
+= simple_form_for :game do |f|
+  = f.error_notification
+  - tags = Game.all_styles
+  h1.question איזה מאפיינים צריך מהמשחק?
+  .answers.d-flex.flex-wrap.w-100.justify-content-center
+  - tags.each do |tag|
+    .answer.bg-secondary.rounded.m-4.d-flex.justify-content-center.align-items-center = tag.name
+    = f.input :name, as: :hidden
