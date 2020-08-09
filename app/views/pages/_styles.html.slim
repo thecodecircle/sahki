@@ -19,5 +19,5 @@ javascript:
     }
 		Cookies.set('tags', new_cookie)
 		console.log(Cookies.get('tags'));
-    alert("Done")
+    $('#render-container').html("#{j render 'pages/done'}")
 	})

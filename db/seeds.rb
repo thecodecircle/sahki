@@ -21,6 +21,8 @@ unless Rails.env.production?
         how_to: "Pass the ball to #{n+1}",
         min_players: rand(1..10),
         max_players: rand(10..100),
+        hearts: rand(10..100),
+        shares: rand(10..100),
         status: "approved"
       )
       game.length_list.add "#{lengths[rand(4)]}"

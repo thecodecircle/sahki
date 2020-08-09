@@ -7,7 +7,14 @@
 			= link_to root_path do
 				i.form-back.fas.fa-arrow-right.fa-2x.icon-secondary.to_hide
 
-		#render-container= render 'pages/lengths'
+		#render-container = render 'pages/lengths'
+
+		- names = []
+		- cookies[:tags].split(",").each do |id|
+			- names << ActsAsTaggableOn::Tag.find(id).name
+		- ranked = Game.rank_games(Game.tagged_with(names)) if names.present?
+		p.text-white#game = ranked.first.name if ranked.present?
+
 
 / .form-games.bg-primary-solid.h-12v.form-rounded.text-center.text-white.resizable
 / 	.game-card
