@@ -40,7 +40,6 @@ yarn-debug.log*
 /tags
 
 /config/application.yml
-/config/database.yml
 /config/master.key
 **.orig
 *.old
