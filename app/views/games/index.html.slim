@@ -1,7 +1,21 @@
 - if true
-  h1 Listing games
 
-  table
+  = form_with method: :get do |f|
+    = f.label :search_term, "Search for:"
+    = f.text_field :search_term, id: :search_term
+    = f.submit "Search"
+
+  h1 Listing games
+  / = @games.pluck(:name)
+  / - @games.reverse.each do |game|
+  /   .card style=("width: 18rem;")
+  /     .card-body
+  /       h5.card-title = game.name
+  /       p.card-text = game.description
+  /       a.btn.btn-primary href="#"  How To Play
+
+
+  table#table
     thead
       tr
         th Name
@@ -34,6 +48,7 @@
           td = link_to 'Destroy', game, data: { confirm: 'Are you sure?' }, method: :delete
           td = link_to 'Heart', heart_it_path(id: game), class: "heart", id: "heart-#{game.id}", remote: true
           td = link_to 'Share', share_it_path(id: game), class: "share", id: "share-#{game.id}", remote: true
+  #results
 
   br
 
@@ -72,5 +87,6 @@
       }).on('ajax:error',function(e, xhr, status, error){
         console.log("no")
       });
+
 - else
   p Lorem ipsum...

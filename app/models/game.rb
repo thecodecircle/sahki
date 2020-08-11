@@ -59,14 +59,4 @@ class Game < ApplicationRecord
     ActsAsTaggableOn::Tag.for_context(:methods)
   end
 
-  def self.trigram(word)
-    return nil if word.empty?
-    padded = "  #{word} "
-    parts = []
-    padded.chars.each_cons(3) do |c|
-      parts << c.join
-    end
-    p parts
-  end
-
 end

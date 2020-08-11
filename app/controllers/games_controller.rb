@@ -4,7 +4,16 @@ class GamesController < ApplicationController
   # GET /games
   # GET /games.json
   def index
-    @games = Game.all
+    if params[:search_term]
+      puts "******************* term: #{params[:search_term]} *********************"
+      @games = Game.search(params[:search_term])
+      respond_to do |format|
+        format.js { render partial: 'search-results'}
+        format.html { @games }
+      end
+    else
+      @games = Game.all
+    end
   end
 
   # GET /games/1

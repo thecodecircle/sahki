@@ -1,0 +1,33 @@
+table
+  thead
+    tr
+      th Name
+      th Description
+      th Min players
+      th Max players
+      th Hearts
+      th Shares
+      th Status
+      th Suggested name
+      th Suggested phone
+      th
+      th
+      th
+
+  tbody
+    - @games.each do |game|
+      tr
+        td = game.name
+        td = game.description
+        td = game.min_players
+        td = game.max_players
+        td id="show_hearts_#{game.id}" = game.hearts
+        td id="show_shares_#{game.id}" = game.shares
+        td = game.status
+        td = game.suggested_name
+        td = game.suggested_phone
+        td = link_to 'Show', game
+        td = link_to 'Edit', edit_game_path(game)
+        td = link_to 'Destroy', game, data: { confirm: 'Are you sure?' }, method: :delete
+        td = link_to 'Heart', heart_it_path(id: game), class: "heart", id: "heart-#{game.id}", remote: true
+        td = link_to 'Share', share_it_path(id: game), class: "share", id: "share-#{game.id}", remote: true
