@@ -3,6 +3,11 @@ class Game < ApplicationRecord
   enum status: [ :pending, :approved ]
   acts_as_taggable_on :lengths, :amounts, :styles, :methods
 
+  include PgSearch::Model
+  pg_search_scope :search, against: {name: 'A', description: 'B'}, associated_against: {
+    rich_text_how_to: [:body]
+  }
+
   validates :name,          presence: true
   validates :description,   presence: true
   validates :how_to,        presence: true
@@ -52,6 +57,16 @@ class Game < ApplicationRecord
 
   def self.all_methods
     ActsAsTaggableOn::Tag.for_context(:methods)
+  end
+
+  def self.trigram(word)
+    return nil if word.empty?
+    padded = "  #{word} "
+    parts = []
+    padded.chars.each_cons(3) do |c|
+      parts << c.join
+    end
+    p parts
   end
 
 end

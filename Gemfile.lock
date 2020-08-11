@@ -148,6 +148,9 @@ GEM
       mini_portile2 (~> 2.4.0)
     open4 (1.3.4)
     pg (1.2.3)
+    pg_search (2.3.2)
+      activerecord (>= 5.2)
+      activesupport (>= 5.2)
     public_suffix (4.0.5)
     puma (4.3.5)
       nio4r (~> 2.0)
@@ -308,6 +311,7 @@ DEPENDENCIES
   mina-ng-puma (>= 1.4.0)
   mina-sidekiq
   pg (>= 1.1)
+  pg_search
   puma (~> 4.1)
   rails (~> 6.0.3, >= 6.0.3.2)
   rails-i18n (~> 6.0.0)
