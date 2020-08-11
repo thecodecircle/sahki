@@ -6,13 +6,12 @@
     = f.submit "Search"
 
   h1 Listing games
-  / = @games.pluck(:name)
-  / - @games.reverse.each do |game|
-  /   .card style=("width: 18rem;")
-  /     .card-body
-  /       h5.card-title = game.name
-  /       p.card-text = game.description
-  /       a.btn.btn-primary href="#"  How To Play
+  - @games.reverse.each do |game|
+    .card style=("width: 18rem;")
+      .card-body
+        h5.card-title = game.name
+        p.card-text = game.description
+        a.btn.btn-primary href="#"  How To Play
 
 
   table#table
