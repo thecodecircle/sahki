@@ -10,22 +10,25 @@
 		#render-container = render 'pages/lengths'
 
 		- names = []
-		- cookies[:tags].split(",").each do |id|
-			- names << ActsAsTaggableOn::Tag.find(id).name
-		- ranked = Game.rank_games(names) if names.present?
+		- if cookies[:tags]
+			- cookies[:tags].split(",").each do |id|
+				- names << ActsAsTaggableOn::Tag.find(id).name
+			- ranked = Game.rank_games(names) if names.present?
+		- else
+		 - ranked = Game.all
 		p.text-white#game = ranked.first.name if ranked.present?
 
 
-/ .form-games.bg-primary-solid.h-12v.form-rounded.text-center.text-white.resizable
-/ 	.game-card
-/ 		i.fas.fa-grip-lines.fa-2x.grip
-/ 		#board.board-min-height.bg-primary-solid
-		/ h2.game-name.pt-2#get_game
-		/ .flex.justify-content-center.w-100.align-items-center.flex-column
-		/ 	.description.game-attrs.w-75.text-right#get_description.d-none
-		/ 	.how-to.game-attrs.w-75.text-right#get_how_to.d-none
-	/ #board
-		/ .card
+.form-games.bg-primary-solid.h-12v.form-rounded.text-center.text-white.resizable
+	.game-card
+		i.fas.fa-grip-lines.fa-2x.grip
+		#board.board-min-height.bg-primary-solid
+		h2.game-name.pt-2#get_game
+		.flex.justify-content-center.w-100.align-items-center.flex-column
+			.description.game-attrs.w-75.text-right#get_description.d-none
+			.how-to.game-attrs.w-75.text-right#get_how_to.d-none
+	#board
+		.card
 
 / .append
 / #board

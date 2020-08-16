@@ -8,7 +8,7 @@
 # Game.create(status: "approved", name: "מוקי צור בשדות הקטל", description: "לרקוד ולשיר לפי השיר", how_to: "עומדים במעל ושרים את השיר", min_players: 5, max_players: 20)
 # Game.create(status: "approved", name: "אינטר גלקטיק סמוראי", description: "לרקוד ולשיר לפי השיר", how_to: "עומדים במעל ושרים את השיר", min_players: 5, max_players: 20)
 
-unless !Rails.env.production?
+unless Rails.env.production?
   lengths = ["5 דקות", "10 דקות", "15 דקות", "20+ דקות"]
   amounts = [5, 10, 15, 20]
   styles = ["כיפי", "מעורר דיון", "אנרגטי", "עצוב"]

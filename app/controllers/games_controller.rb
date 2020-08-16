@@ -91,17 +91,25 @@ class GamesController < ApplicationController
 
   def filter_tag
     puts "******************* cookies[:tags] => #{cookies[:tags]} *********************"
+    puts "******************* #{Game.first(10).pluck(:name)} *********************"
     # tag_array = JSON.parse(cookies[:tags])
     # @games = Game.tag_filter(tag_array)
     # @games = Game.rank_games(@games)
     names = []
-    cookies[:tags].split(",").each do |id|
-      names << ActsAsTaggableOn::Tag.find(id).name
+    if cookies[:tags]
+      cookies[:tags].split(",").each do |id|
+        names << ActsAsTaggableOn::Tag.find(id).name
+      end
+    else
+      puts "*************   flatten ***************************"
+      names << Game.first(10).pluck(:name)
+      names.flatten!
     end
+    puts "***************** names: #{names}***********************"
     @games = Game.rank_games(names) if names.present?
     @games.first.name if @games.present?
     puts "******************* Filtering and sorting... *********************"
-
+    puts "games: #{@games}"
     respond_to do |format|
       format.html { redirect_to page_path('form'), notice: 'Filter.' }
       format.json { render json: @games }
