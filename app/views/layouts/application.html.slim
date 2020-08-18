@@ -9,6 +9,7 @@ html dir="rtl"
     meta name="HandheldFriendly" content="True"
     meta name="MobileOptimized" content="320"
     meta name="turbolinks-cache-control" content="no-cache"
+
     title
       - if content_for?(:title)
         = yield(:title) + " | sahki"
@@ -25,6 +26,8 @@ html dir="rtl"
 		/ script src="jquery.ui.touch-punch.min.js"
 		/ script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"
     script src = "https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"
+    link crossorigin="anonymous" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/css/bootstrap-slider.css" integrity="sha512-SZgE3m1he0aEF3tIxxnz/3mXu/u/wlMNxQSnE0Cni9j/O8Gs+TjM9tm1NX34nRQ7GiLwUEzwuE3Wv2FLz2667w==" rel="stylesheet"
+    script crossorigin="anonymous" integrity="sha512-tCkLWlSXiiMsUaDl5+8bqwpGXXh0zZsgzX6pB9IQCZH+8iwXRYfcCpdxl/owoM6U4ap7QZDW4kw7djQUiQ4G2A==" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/bootstrap-slider.js"
 
   body class=body_class
     main

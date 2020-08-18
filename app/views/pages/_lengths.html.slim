@@ -1,25 +1,31 @@
-- tags = Game.all_lengths
-h1.question ?כמה זמן יש לך למשחק
-.answers.d-flex.flex-wrap.w-100.justify-content-center
-	- tags.each_with_index do |tag, i|
-		button.answer.bg-secondary.rounded.m-4.d-flex.justify-content-center.align-items-center.border-none value="#{tag.id}"
-			= tag.name
-
+- tags = Game.all_lengths.pluck(:name).uniq.sort_by{|f| f.split(" ")[0].to_i }
+/ h1.question ?כמה זמן יש לך למשחק
+/ .answers.d-flex.flex-wrap.w-100.justify-content-center
+/ 	- tags.each_with_index do |tag, i|
+/ 		button.answer.bg-secondary.rounded.m-4.d-flex.justify-content-center.align-items-center.border-none value="#{tag.id}"
+/ 			= tag.name
+input#lengthSlider.slider data-slider-id="lengthSlider" name="slider" data-slider-ticks="[0, 1, 2, 3]"  data-slider-ticks-labels='#{tags}' data-slider-max="3" data-slider-min="0" data-slider-step="1" data-slider-value="1"  data-slider-tooltip="hide" type="text"
+button.answer.bg-secondary.rounded.m-4.d-flex.justify-content-center.align-items-center.border-none value="#{tag.id}"
 javascript:
+		console.log("#{Game.all_lengths.pluck(:name).uniq}")
 		$(".answer").click(function(event) {
-	    var new_cookie = Cookies.get('tags')
-			if (new_cookie) {
-				var check_cookie = new_cookie.split(",")
-				if (!check_cookie.includes($(this).val())) {
-					new_cookie += "," + $(this).val()
-				}
-			}
-			else {
-				new_cookie = $(this).val()
-			}
-			Cookies.set('tags', new_cookie)
-			// console.log(Cookies.get('tags'));
-	    $('#render-container').html("#{j render 'pages/amounts'}")
+			var value = parseInt($("input[name='slider']").val())
+			console.log(value);
+			var tags = "#{tags}"
+			console.log(tags);
+	    // var new_cookie = Cookies.get('tags')
+			// if (new_cookie) {
+			// 	var check_cookie = new_cookie.split(",")
+			// 	if (!check_cookie.includes($(this).val())) {
+			// 		new_cookie += "," + $(this).val()
+			// 	}
+			// }
+			// else {
+			// 	new_cookie = $(this).val()
+			// }
+			// Cookies.set('tags', new_cookie)
+			// // console.log(Cookies.get('tags'));
+	    // $('#render-container').html("#{j render 'pages/amounts'}")
 		})
 
 	$.ajax({
@@ -36,3 +42,4 @@ javascript:
 		 }
 		 // console.log("ajax");
 	}})
+	var slider = new Slider('#lengthSlider', {});
