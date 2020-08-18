@@ -3,19 +3,19 @@
   = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
 
   .form-inputs
-    = f.input :name
-    = f.input :description
-    .label How to play:
+    = f.input :name, label: "שם המשחק"
+    = f.input :description, label: "תיאור המשחק"
+    .label איך משחקים?
     = f.rich_text_area :how_to
-    = f.input :min_players
-    = f.input :max_players
-    = f.input :hearts
-    = f.input :shares
-    = f.input :status, collection: Game.statuses.keys.to_a, include_blank: false
+    = f.input :min_players, label: "מינימום שחקנים"
+    = f.input :max_players, label: "מקסימום שחקניות"
+    = f.input :hearts, label: "לבבות"
+    = f.input :shares, label: "שיתופים"
+    = f.input :status, collection: Game.statuses.keys.to_a, include_blank: false, label: "סטטוס"
     / = f.input :agriculture,   collection: agrihash, label_method: :second, value_method: :first
     / form.select :status, Production.statuses.keys.to_a
-    = f.input :suggested_name
-    = f.input :suggested_phone
+    = f.input :suggested_name, label: "שם המציעה"
+    = f.input :suggested_phone, label: "טלפון המציעה"
 
   .form-actions
-    = f.button :submit
+    = f.button :submit, "שליחת המשחק לאישור"
