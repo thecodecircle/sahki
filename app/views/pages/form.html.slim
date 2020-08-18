@@ -16,7 +16,7 @@
 			- ranked = Game.rank_games(names) if names.present?
 		- else
 		 - ranked = Game.all
-		p.text-white#game = ranked.first.name if ranked.present?
+		p.text-white.hidden#game = ranked.first.name if ranked.present?
 
 
 .form-games.bg-primary-solid.h-12v.form-rounded.text-center.text-white.resizable
@@ -94,21 +94,55 @@ javascript:
 			 data: { tags: Cookies.getJSON('tags') },
 			 url: "/filter_tag",
 			 success: function(data){
-				 console.log(data);
-				 $.each(data.reverse(), function(index, game) {
+				 // console.log(data);
+				 $.each(data, function(index, game) {
 					 // console.log(index);
 					 carousel.push(index, game)
 					 // console.log(data);
 
 				 });
 				 carousel.handle()
-				 $('#get_game').html(data[0].name)
-				 $('.game-card').attr('data-next', 1)
-				 $('#get_description').html(data[0].description)
-				 $('#get_how_to').html(data[0].how_to)
+				 if (data[0]) {
+					 $('#get_game').html(data[0].name)
+					 $('.game-card').attr('data-next', 1)
+					 $('#get_description').html(data[0].description)
+					 $('#get_how_to').html(data[0].how_to)
+				 }
+				 else {
+					 $('#get_game').html("אין משחקים שתואמים את התגיות שסימנת")
+				 }
 
 		  }})
 		});
+		$(".answer").click(function(event) {
+			$.ajax({
+				type: "GET",
+				dataType: "json",
+				data: { tags: Cookies.getJSON('tags') },
+				url: "/filter_tag",
+				success: function(data){
+					console.log("answer ajax")
+					 // console.log(data);
+				  $('.card').remove()
+					$.each(data, function(index, game) {
+						console.log(game);
+						carousel.push(index, game)
+						// console.log(data);
+
+					});
+					carousel.handle()
+					if (data[0]) {
+						$('#get_game').html(data[0].name)
+						$('.game-card').attr('data-next', 1)
+						$('#get_description').html(data[0].description)
+						$('#get_how_to').html(data[0].how_to)
+					}
+					else {
+						$('#get_game').html("אין משחקים שתואמים את התגיות שסימנת")
+					}
+				}
+			})
+		})
 
 		counter = 1
 		var panDirection = false

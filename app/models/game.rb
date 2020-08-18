@@ -28,7 +28,11 @@ class Game < ApplicationRecord
   end
 
   def self.rank_games(tags)
-    games = Game.tagged_with(tags)
+    if tags.nil?
+      games = Game.all
+    else
+      games = Game.tagged_with(tags)
+    end
     scores = Hash.new
     games.each do |game|
       scores[game.name.to_sym] = game.hearts + (game.shares * 2)
