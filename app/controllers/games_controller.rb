@@ -91,7 +91,7 @@ class GamesController < ApplicationController
 
   def filter_tag
     puts "******************* cookies[:tags] => #{cookies[:tags]} *********************"
-    puts "******************* #{Game.first(10).pluck(:name)} *********************"
+    # puts "******************* #{Game.first(10).pluck(:name)} *********************"
     # tag_array = JSON.parse(cookies[:tags])
     # @games = Game.tag_filter(tag_array)
     # @games = Game.rank_games(@games)
@@ -101,12 +101,10 @@ class GamesController < ApplicationController
         tags << ActsAsTaggableOn::Tag.find(id).name
       end
     else
-      puts "*************   flatten ***************************"
-      tags << Game.first(10).pluck(:name)
-      tags.flatten!
+      tags = nil
     end
-    puts "***************** tags: #{tags}***********************"
-    @games = Game.rank_games(tags) if tags.present?
+    # puts "***************** tags: #{tags}***********************"
+    @games = Game.rank_games(tags)
     @games.first.name if @games.present?
     puts "******************* Filtering and sorting... *********************"
     puts "games: #{@games}"

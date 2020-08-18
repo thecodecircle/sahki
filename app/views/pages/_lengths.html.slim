@@ -6,27 +6,33 @@ h1.question ?כמה זמן יש לך למשחק
 			= tag.name
 
 javascript:
-	$(".answer").click(function(event) {
-    var new_cookie = Cookies.get('tags')
-    var check_cookie = new_cookie.split(",")
-    if (!check_cookie.includes($(this).val())) {
-      if (new_cookie) {
-        new_cookie += "," + $(this).val()
-      }
-      else {
-        new_cookie = $(this).val()
-      }
-    }
-		Cookies.set('tags', new_cookie)
-		console.log(Cookies.get('tags'));
-    $('#render-container').html("#{j render 'pages/amounts'}")
-	})
+		$(".answer").click(function(event) {
+	    var new_cookie = Cookies.get('tags')
+			if (new_cookie) {
+				var check_cookie = new_cookie.split(",")
+				if (!check_cookie.includes($(this).val())) {
+					new_cookie += "," + $(this).val()
+				}
+			}
+			else {
+				new_cookie = $(this).val()
+			}
+			Cookies.set('tags', new_cookie)
+			// console.log(Cookies.get('tags'));
+	    $('#render-container').html("#{j render 'pages/amounts'}")
+		})
+
 	$.ajax({
 	 type: "GET",
 	 dataType: "json",
 	 data: { tags: Cookies.getJSON('tags') },
 	 url: "/filter_tag",
 	 success: function(data){
-		 $('#game').html(data[0].name)
-		 console.log("ajax");
+		 if (data[0]) {
+			 $('#game').html(data[0].name)
+		 }
+		 else {
+			 $('#game').html("אין משחקים שתואמים את התגיות שסימנת")
+		 }
+		 // console.log("ajax");
 	}})
