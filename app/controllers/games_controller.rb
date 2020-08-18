@@ -95,18 +95,18 @@ class GamesController < ApplicationController
     # tag_array = JSON.parse(cookies[:tags])
     # @games = Game.tag_filter(tag_array)
     # @games = Game.rank_games(@games)
-    names = []
+    tags = []
     if cookies[:tags]
       cookies[:tags].split(",").each do |id|
-        names << ActsAsTaggableOn::Tag.find(id).name
+        tags << ActsAsTaggableOn::Tag.find(id).name
       end
     else
       puts "*************   flatten ***************************"
-      names << Game.first(10).pluck(:name)
-      names.flatten!
+      tags << Game.first(10).pluck(:name)
+      tags.flatten!
     end
-    puts "***************** names: #{names}***********************"
-    @games = Game.rank_games(names) if names.present?
+    puts "***************** tags: #{tags}***********************"
+    @games = Game.rank_games(tags) if tags.present?
     @games.first.name if @games.present?
     puts "******************* Filtering and sorting... *********************"
     puts "games: #{@games}"
