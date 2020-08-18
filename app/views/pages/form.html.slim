@@ -1,11 +1,11 @@
 .form.bg-primary.h-100v
 	.containe.text-center.d-flex.flex-column.p-0
 		.d-flex.w-full.justify-content-between.align-items-center
-			div
-			.form-logo.to_hide
-				 = image_tag "temp-logo.svg"
 			= link_to root_path do
 				i.form-back.fas.fa-arrow-right.fa-2x.icon-secondary.to_hide
+			.form-logo.to_hide
+				 = image_tag "temp-logo.svg"
+			div
 
 		#render-container = render 'pages/lengths'
 

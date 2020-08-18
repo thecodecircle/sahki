@@ -1,91 +1,58 @@
-- if true
+.d-flex.w-full.justify-content-between.align-items-center
+  = link_to root_path do
+    i.form-back.fas.fa-arrow-right.fa-2x.icon-secondary.to_hide
+  .form-logo.to_hide
+    = image_tag "temp-logo.svg"
+  div
 
-  = form_with method: :get do |f|
-    = f.label :search_term, "Search for:"
-    = f.text_field :search_term, id: :search_term
-    = f.submit "Search"
+.search-container.h-100
+  .d-flex.justify-content-center.align-items-center.w-100
+    = form_with method: :get, class:"search-form mt-3" do |f|
+      / = f.label :search_term, "Search for:"
+      = f.text_field :search_term, id: :search_term
+      / i.fas.fa-search.text-dark.search-icon style=(" position:relative; left: -30px")
+      / = f.submit "<i class='fas fa-search text-dark search-icon'></i>"
+      = f.button :submit, class: "search-icon" do
+        i.fas.fa-search.text-muted
 
-  h1 Listing games
-  - @games.reverse.each do |game|
-    .card style=("width: 18rem;")
-      .card-body
-        h5.card-title = game.name
-        p.card-text = game.description
-        a.btn.btn-primary href="#"  How To Play
+  .search-cards.d-flex.flex-column.align-items-center.justify-content-center
+    - @games.reverse.each do |game|
+      .search-card
+        .card-body
+          h5.card-title = game.name
+          p.card-text = game.description
+          a.btn.btn-primary href="#"  How To Play
 
-
-  table#table
-    thead
-      tr
-        th Name
-        th Description
-        th Min players
-        th Max players
-        th Hearts
-        th Shares
-        th Status
-        th Suggested name
-        th Suggested phone
-        th
-        th
-        th
-
-    tbody
-      - @games.each do |game|
-        tr
-          td = game.name
-          td = game.description
-          td = game.min_players
-          td = game.max_players
-          td id="show_hearts_#{game.id}" = game.hearts
-          td id="show_shares_#{game.id}" = game.shares
-          td = game.status
-          td = game.suggested_name
-          td = game.suggested_phone
-          td = link_to 'Show', game
-          td = link_to 'Edit', edit_game_path(game)
-          td = link_to 'Destroy', game, data: { confirm: 'Are you sure?' }, method: :delete
-          td = link_to 'Heart', heart_it_path(id: game), class: "heart", id: "heart-#{game.id}", remote: true
-          td = link_to 'Share', share_it_path(id: game), class: "share", id: "share-#{game.id}", remote: true
-  #results
-
-  br
-
-  = link_to 'New Game', new_game_path
-
-  javascript:
-      $('.heart').on('ajax:success', function(e, data, status, xhr){
-        console.log("yess")
-        var heart_arr = $(this).attr('id').split("-")
-        var heart_id = heart_arr[1]
-        $.ajax({
-         type: "GET",
-         dataType: "json",
-         url: "/games/" + heart_id,
-         success: function(data){
-           console.log(data.hearts);
-           $('#show_hearts_' + heart_id).html(data.hearts)
-         }
-     })
-      }).on('ajax:error',function(e, xhr, status, error){
-        console.log("no")
-      });
-      $('.share').on('ajax:success', function(e, data, status, xhr){
-        console.log("yess")
-        var share_arr = $(this).attr('id').split("-")
-        var share_id = share_arr[1]
-        $.ajax({
-         type: "GET",
-         dataType: "json",
-         url: "/games/" + share_id,
-         success: function(data){
-           console.log(data.shares);
-           $('#show_shares_' + share_id).html(data.shares)
-         }
-     })
-      }).on('ajax:error',function(e, xhr, status, error){
-        console.log("no")
-      });
-
-- else
-  p Lorem ipsum...
+javascript:
+    $('.heart').on('ajax:success', function(e, data, status, xhr){
+      console.log("yess")
+      var heart_arr = $(this).attr('id').split("-")
+      var heart_id = heart_arr[1]
+      $.ajax({
+       type: "GET",
+       dataType: "json",
+       url: "/games/" + heart_id,
+       success: function(data){
+         console.log(data.hearts);
+         $('#show_hearts_' + heart_id).html(data.hearts)
+       }
+   })
+    }).on('ajax:error',function(e, xhr, status, error){
+      console.log("no")
+    });
+    $('.share').on('ajax:success', function(e, data, status, xhr){
+      console.log("yess")
+      var share_arr = $(this).attr('id').split("-")
+      var share_id = share_arr[1]
+      $.ajax({
+       type: "GET",
+       dataType: "json",
+       url: "/games/" + share_id,
+       success: function(data){
+         console.log(data.shares);
+         $('#show_shares_' + share_id).html(data.shares)
+       }
+   })
+    }).on('ajax:error',function(e, xhr, status, error){
+      console.log("no")
+    });
