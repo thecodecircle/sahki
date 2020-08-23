@@ -29,6 +29,8 @@ class Game < ApplicationRecord
 
   def self.rank_games(tags)
     if tags.nil?
+			puts "****************************************"
+			puts "tags nil"
       games = Game.all
     else
       games = Game.tagged_with(tags)

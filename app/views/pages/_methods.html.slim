@@ -1,20 +1,44 @@
-- tags = Game.all_methods
+- tags = Game.all_methods.pluck(:name).uniq.sort_by{|f| f.split(" ")[0].to_i }
+- tag_ids = Game.all_methods.ids
 h1.question מה עושים במשחק?
-.answers.d-flex.flex-wrap.w-100.justify-content-center
-	- tags.each_with_index do |tag, i|
-		button.answer.bg-secondary.rounded.m-4.d-flex.justify-content-center.align-items-center.border-none value="#{tag.id}"
-			= tag.name
-
+/ .answers.d-flex.flex-wrap.w-100.justify-content-center
+/ 	- tags.each_with_index do |tag, i|
+/ 		button.answer.bg-secondary.rounded.m-4.d-flex.justify-content-center.align-items-center.border-none value="#{tag.id}"
+/ 			= tag.name
+.d-flex.flex-column.w-100.justify-content-center.align-items-center.mt-5
+	input#methodSlider.slider data-slider-id="methodSlider" name="methodSlider" data-slider-ticks="[0, 1, 2, 3]"  data-slider-ticks-labels='#{tags}' data-slider-max="3" data-slider-min="0" data-slider-step="1" data-slider-value="1"  data-slider-tooltip="hide" type="text"
+	button.answer.bg-secondary.rounded.m-4.d-flex.justify-content-center.align-items-center.border-none המשך
 javascript:
+	// $(".answer").click(function(event) {
+  //   var new_cookie = Cookies.get('tags')
+  //   var check_cookie = new_cookie.split(",")
+  //   if (!check_cookie.includes($(this).val())) {
+  //     if (new_cookie) {
+  //       new_cookie += "," + $(this).val()
+  //     }
+  //     else {
+  //       new_cookie = $(this).val()
+  //     }
+  //   }
+	// 	Cookies.set('tags', new_cookie)
+	// 	console.log(Cookies.get('tags'));
+  //   $('#render-container').html("#{j render 'pages/styles'}")
+	// })
+
 	$(".answer").click(function(event) {
+		var value = parseInt($("input[name='methodSlider']").val())
+		var tags = #{tag_ids}
+		// console.log("value: " + value);
+		// console.log(tags);
     var new_cookie = Cookies.get('tags')
-    var check_cookie = new_cookie.split(",")
-    if (!check_cookie.includes($(this).val())) {
+		// console.log(new_cookie);
+		var check_cookie = new_cookie.split(",")
+    if (!check_cookie.includes(tags[value])) {
       if (new_cookie) {
-        new_cookie += "," + $(this).val()
+        new_cookie += "," + tags[value]
       }
       else {
-        new_cookie = $(this).val()
+        new_cookie = tags[value]
       }
     }
 		Cookies.set('tags', new_cookie)
@@ -28,5 +52,5 @@ javascript:
 	 url: "/filter_tag",
 	 success: function(data){
 		 $('#game').html(data[0].name)
-		 console.log("ajax");
 	}})
+	var slider = new Slider('#methodSlider', {});

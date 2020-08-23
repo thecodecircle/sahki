@@ -1,20 +1,30 @@
-- tags = Game.all_amounts
+- tags = Game.all_amounts.pluck(:name).uniq.sort_by{|f| f.split(" ")[0].to_i }
+- tag_ids = Game.all_amounts.ids
 h1.question כמה חניכות ישתתפו במשחק?
-.answers.d-flex.flex-wrap.w-100.justify-content-center
-	- tags.each_with_index do |tag, i|
-		button.answer.bg-secondary.rounded.m-4.d-flex.justify-content-center.align-items-center.border-none value="#{tag.id}"
-			= tag.name
+/ .answers.d-flex.flex-wrap.w-100.justify-content-center
+/ 	- tags.each_with_index do |tag, i|
+/ 		button.answer.bg-secondary.rounded.m-4.d-flex.justify-content-center.align-items-center.border-none value="#{tag.id}"
+/ 			= tag.name
+.d-flex.flex-column.w-100.justify-content-center.align-items-center.mt-5
+	input#amountSlider.slider data-slider-id="amountSlider" name="amountSlider" data-slider-ticks="[0, 1, 2, 3]"  data-slider-ticks-labels='#{tags}' data-slider-max="3" data-slider-min="0" data-slider-step="1" data-slider-value="1"  data-slider-tooltip="hide" type="text"
+	button.answer.bg-secondary.rounded.m-4.d-flex.justify-content-center.align-items-center.border-none המשך
 
 javascript:
+	// console.log("#{tags}");
 	$(".answer").click(function(event) {
+		var value = parseInt($("input[name='amountSlider']").val())
+		var tags = #{tag_ids}
     var new_cookie = Cookies.get('tags')
-    var check_cookie = new_cookie.split(",")
-    if (!check_cookie.includes($(this).val())) {
+		// console.log("value: " + value);
+		// console.log("value: " + value);
+		// console.log(new_cookie);
+		var check_cookie = new_cookie.split(",")
+    if (!check_cookie.includes(tags[value])) {
       if (new_cookie) {
-        new_cookie += "," + $(this).val()
+        new_cookie += "," + tags[value]
       }
       else {
-        new_cookie = $(this).val()
+        new_cookie = tags[value]
       }
     }
 		Cookies.set('tags', new_cookie)
@@ -28,5 +38,6 @@ javascript:
 	 url: "/filter_tag",
 	 success: function(data){
 		 $('#game').html(data[0].name)
-		 console.log("ajax");
+		 // console.log("ajax");
 	}})
+	var slider = new Slider('#amountSlider', {});

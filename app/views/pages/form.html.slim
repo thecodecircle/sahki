@@ -1,3 +1,6 @@
+javascript:
+	Cookies.remove("tags")
+	// console.log(Cookies.get())
 .form.bg-primary.h-100v
 	.containe.text-center.d-flex.flex-column.p-0
 		.d-flex.w-full.justify-content-between.align-items-center
@@ -10,12 +13,12 @@
 		#render-container = render 'pages/lengths'
 
 		- names = []
-		- if cookies[:tags]
-			- cookies[:tags].split(",").each do |id|
-				- names << ActsAsTaggableOn::Tag.find(id).name
-			- ranked = Game.rank_games(names) if names.present?
-		- else
-		 - ranked = Game.all
+		- ranked = Game.all
+		/ - if cookies[:tags]
+		/ 	- cookies[:tags].split(",").each do |id|
+		/ 		- names << ActsAsTaggableOn::Tag.find(id).name
+		/ 	- ranked = Game.rank_games(names) if names.present?
+		/ - else
 		p.text-white.hidden#game = ranked.first.name if ranked.present?
 
 
@@ -30,19 +33,9 @@
 	#board
 		.card
 
-/ .append
-/ #board
-/ 	.card
-/ #slider.swipe.h-100v
-/   .swipe-wrap
-/     .h-1.w-1.bg-success
-/     .h-1.w-1.bg-danger
-/     .h-1.w-1.bg-warning
-/ .h-100v
-/ 	.draggable Draggable Element
 javascript:
+	// console.log(Cookies.get("tags"));
 	$(document).ready(function() {
-
 
 
 		// import Swipe from 'swipejs'
@@ -121,11 +114,11 @@ javascript:
 				data: { tags: Cookies.getJSON('tags') },
 				url: "/filter_tag",
 				success: function(data){
-					console.log("answer ajax")
+					// console.log("answer ajax")
 					 // console.log(data);
 				  $('.card').remove()
 					$.each(data, function(index, game) {
-						console.log(game);
+						// console.log(game);
 						carousel.push(index, game)
 						// console.log(data);
 
@@ -177,7 +170,7 @@ javascript:
 						}else {
 							topCardId = 1
 						}
-						console.log(topCardId);
+						// console.log(topCardId);
 
 						$(this.nextCard).removeClass('nextCard')
 						$(this.prevCard).removeClass('prevCard')
@@ -193,8 +186,8 @@ javascript:
 							this.prevCard = this.board.querySelectorAll("#game-"  + parseInt(topCardId - 1))[0]
 						}
 
-						if (this.nextCard != undefined) console.log(this.nextCard.id);
-						if (this.prevCard != undefined) console.log("prev: "+this.prevCard.id);
+						// if (this.nextCard != undefined) console.log(this.nextCard.id);
+						// if (this.prevCard != undefined) console.log("prev: "+this.prevCard.id);
 
 						// if at least one card is present
 						if (this.cards.length > 0) {
@@ -335,7 +328,7 @@ javascript:
 									// this.nextCard.style.transition = 'transform 100ms linear'
 
 								} else {
-									console.log("fianl");
+									// console.log("fianl");
 								}
 
 								// check threshold and movement direction
@@ -448,6 +441,8 @@ javascript:
 
 				let board = document.querySelector('#board')
 				let carousel = new Carousel(board)
+				$("body").scrollTop(0)
+				$("html").scrollTop(0)
 				$("body").addClass('overflow-hidden')
 				var logo_initial_top = 	parseInt($(".form-logo").children('img').offset().top)
 				interact('.resizable')
@@ -519,7 +514,7 @@ javascript:
 							$(".to_hide").show()
 
 						}
-						console.log($(".form-back").css('font-size'));
+						// console.log($(".form-back").css('font-size'));
 						// console.log($(".form-logo").children('img').offset().top);
 						if (top <= question + 30 && up) {
 							$(".question").offset({top: $(".question").offset().top - 1})
@@ -545,7 +540,7 @@ javascript:
 
 							}
 							if (parseInt($(".form-back").css('font-size')) < 32) {
-								console.log("true");
+								// console.log("true");
 								$(".form-back").css('font-size', parseInt($(".form-back").css('font-size')) + 2 + 'px')
 
 							}
@@ -566,6 +561,6 @@ javascript:
 						}
 					})
 
-		console.log("log top:");
-		console.log(	$(".form-logo").children('img').offset().top);
+		// console.log("log top:");
+		// console.log(	$(".form-logo").children('img').offset().top);
 	});
