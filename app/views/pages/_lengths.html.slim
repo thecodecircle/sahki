@@ -1,4 +1,6 @@
-- tags = Game.all_lengths.pluck(:name).uniq.sort_by{|f| f.split(" ")[0].to_i }
+- tag_names = Game.all_lengths.pluck(:name).uniq.sort_by{|f| f.split(" ")[0].to_i }
+- tags = Game.all_lengths.find_by(name: tag_names[0])
+/ - tags = Game.all_lengths.pluck(:name).uniq.sort_by{|f| f.split(" ")[0].to_i }
 - tag_ids = Game.all_lengths.ids
 h1.question ?כמה זמן יש לך למשחק
 / .answers.d-flex.flex-wrap.w-100.justify-content-center
@@ -6,15 +8,17 @@ h1.question ?כמה זמן יש לך למשחק
 / 		button.answer.bg-secondary.rounded.m-4.d-flex.justify-content-center.align-items-center.border-none value="#{tag.id}"
 / 			= tag.name
 .d-flex.flex-column.w-100.justify-content-center.align-items-center.mt-5
-	input#lengthSlider.slider data-slider-id="lengthSlider" name="lengthSlider" data-slider-ticks="[0, 1, 2, 3]"  data-slider-ticks-labels='#{tags}' data-slider-max="3" data-slider-min="0" data-slider-step="1" data-slider-value="1"  data-slider-tooltip="hide" type="text"
-	button.answer.bg-secondary.rounded.m-4.d-flex.justify-content-center.align-items-center.border-none המשך
+	input#lengthSlider.slider data-slider-id="lengthSlider" name="lengthSlider" data-slider-ticks="[0, 1, 2, 3]"  data-slider-ticks-labels='#{tag_names}' data-slider-max="3" data-slider-min="0" data-slider-step="1" data-slider-value="1"  data-slider-tooltip="hide" type="text"
+	button.send.bg-secondary.rounded.m-4.d-flex.justify-content-center.align-items-center.border-none המשך
 javascript:
-
+	Cookies.set("question", 0)
+	// console.log(Cookies.get("question"));
 		// console.log(#{Game.all_lengths.pluck(:name).uniq.to_json.html_safe})
-		$(".answer").click(function(event) {
+		console.log("#{tags}");
+		$(".send").click(function(event) {
 			var value = parseInt($("input[name='lengthSlider']").val())
 			// console.log(value);
-
+			// console.log(value);
 			var tags = #{tag_ids}
 	    var new_cookie = tags[value]
 			// console.log(new_cookie);
@@ -38,12 +42,12 @@ javascript:
 	 data: { tags: Cookies.getJSON('tags') },
 	 url: "/filter_tag",
 	 success: function(data){
-		 if (data[0]) {
-			 $('#game').html(data[0].name)
-		 }
-		 else {
-			 $('#game').html("אין משחקים שתואמים את התגיות שסימנת")
-		 }
+		 // if (data[0]) {
+			//  $('#game').html(data[0].name)
+		 // }
+		 // else {
+			//  $('#game').html("אין משחקים שתואמים את התגיות שסימנת")
+		 // }
 		 // console.log("ajax");
 	}})
 	var slider = new Slider('#lengthSlider', {});

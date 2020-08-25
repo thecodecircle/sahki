@@ -7,11 +7,13 @@ h1.question כמה חניכות ישתתפו במשחק?
 / 			= tag.name
 .d-flex.flex-column.w-100.justify-content-center.align-items-center.mt-5
 	input#amountSlider.slider data-slider-id="amountSlider" name="amountSlider" data-slider-ticks="[0, 1, 2, 3]"  data-slider-ticks-labels='#{tags}' data-slider-max="3" data-slider-min="0" data-slider-step="1" data-slider-value="1"  data-slider-tooltip="hide" type="text"
-	button.answer.bg-secondary.rounded.m-4.d-flex.justify-content-center.align-items-center.border-none המשך
+	button.send.bg-secondary.rounded.m-4.d-flex.justify-content-center.align-items-center.border-none המשך
 
 javascript:
+	Cookies.set("question", 1)
+
 	// console.log("#{tags}");
-	$(".answer").click(function(event) {
+	$(".send").click(function(event) {
 		var value = parseInt($("input[name='amountSlider']").val())
 		var tags = #{tag_ids}
     var new_cookie = Cookies.get('tags')
