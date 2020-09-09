@@ -15,18 +15,28 @@ javascript:
 	// console.log("#{tags}");
 	$(".send").click(function(event) {
 		var value = parseInt($("input[name='amountSlider']").val())
-		var tags = #{tag_ids}
+		switch(value) {
+			case 0:
+				var slider_val = "5"
+				break;
+			case 1:
+				var slider_val = "10"
+				break;
+			case 2:
+				var slider_val = "15"
+				break;
+			case 3:
+				var slider_val = "20"
+				break;
+		}
     var new_cookie = Cookies.get('tags')
-		// console.log("value: " + value);
-		// console.log("value: " + value);
-		// console.log(new_cookie);
 		var check_cookie = new_cookie.split(",")
-    if (!check_cookie.includes(tags[value])) {
+    if (!check_cookie.includes(slider_val)) {
       if (new_cookie) {
-        new_cookie += "," + tags[value]
+        new_cookie += "," + slider_val
       }
       else {
-        new_cookie = tags[value]
+        new_cookie = slider_val
       }
     }
 		Cookies.set('tags', new_cookie)
@@ -39,7 +49,6 @@ javascript:
 	 data: { tags: Cookies.getJSON('tags') },
 	 url: "/filter_tag",
 	 success: function(data){
-		 $('#game').html(data[0].name)
-		 // console.log("ajax");
+		 // $('#game').html(data[0].name)
 	}})
 	var slider = new Slider('#amountSlider', {});

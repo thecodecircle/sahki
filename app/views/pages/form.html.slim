@@ -31,55 +31,11 @@ javascript:
 		.flex.justify-content-center.w-100.align-items-center.flex-column
 			.description.game-attrs.w-75.text-right#get_description.d-none
 			.how-to.game-attrs.w-75.text-right#get_how_to.d-none
-	/ #board
-	/ 	.card
 
 javascript:
-	// console.log(Cookies.get("tags"));
 	$(document).ready(function() {
 		$("body").scrollTop(0)
 		$("html").scrollTop(0)
-		// $("body").addClass('overflow-hidden')
-		// var current_question = Cookies.get("question")
-		// console.log(current_question);
-		// switch (parseInt(current_question)) {
-		// 	case 0:
-		// 		$("#render-container").html("#{j(render 'pages/lengths')}")
-		// 		break;
-		// 	case 1:
-		// 		$("#render-container").html("#{j(render 'pages/amounts')}")
-		// 		break;
-		// 	case 2:
-		// 		$("#render-container").html("#{j(render 'pages/methods')}")
-		// 		break;
-		// 	case 3:
-		//
-		// 		$("#render-container").html("#{j(render 'pages/styles')}")
-		// 		default:
-		// 			$("#render-container").html("#{j(render 'pages/lengths')}")
-		//
-		// }
-		// console.log(window.location.href);
-		// import Swipe from 'swipejs'
-		// const position = { x: 0, y: 0 }
-		//
-		// interact('.draggable').draggable({
-		// 	startAxis: 'y',
-	  // 	lockAxis: 'start',
-		//   listeners: {
-		//     start (event) {
-		//       console.log(event.type, event.target)
-		//     },
-		//     move (event) {
-		//       position.x += event.dx
-		//       position.y += event.dy
-		//
-		//       event.target.style.transform =
-		//         `translate(${position.x}px, ${position.y}px)`
-		//     },
-		//   }
-		//
-		// })bac
 		var up
 		var up_or_down
 		var original_question = $(".question").offset().top
@@ -129,7 +85,9 @@ javascript:
 
 		  }})
 		});
+		console.log(Cookies.getJSON('tags'));
 		$(".send").click(function(event) {
+			console.log(Cookies.getJSON('tags'));
 			$.ajax({
 				type: "GET",
 				dataType: "json",

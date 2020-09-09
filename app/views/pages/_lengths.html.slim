@@ -1,7 +1,7 @@
 - tag_names = Game.all_lengths.pluck(:name).uniq.sort_by{|f| f.split(" ")[0].to_i }
 - tags = Game.all_lengths.find_by(name: tag_names[0])
 / - tags = Game.all_lengths.pluck(:name).uniq.sort_by{|f| f.split(" ")[0].to_i }
-- tag_ids = Game.all_lengths.ids
+/ - tag_ids = Game.all_lengths.ids.uniq
 h1.question ?כמה זמן יש לך למשחק
 / .answers.d-flex.flex-wrap.w-100.justify-content-center
 / 	- tags.each_with_index do |tag, i|
@@ -17,22 +17,21 @@ javascript:
 		console.log("#{tags}");
 		$(".send").click(function(event) {
 			var value = parseInt($("input[name='lengthSlider']").val())
-			// console.log(value);
-			// console.log(value);
-			var tags = #{tag_ids}
-	    var new_cookie = tags[value]
-			// console.log(new_cookie);
-			// if (new_cookie) {
-			// 	var check_cookie = new_cookie.split(",")
-			// 	if (!check_cookie.includes($(this).val())) {
-			// 		new_cookie += "," + $(this).val()
-			// 	}
-			// }
-			// else {
-			// 	new_cookie = $(this).val()
-			// }
+			switch(value) {
+			  case 0:
+			    var new_cookie = "5 דקות"
+			    break;
+			  case 1:
+			    var new_cookie = "10 דקות"
+			    break;
+				case 2:
+			    var new_cookie = "15 דקות"
+			    break;
+				case 3:
+			    var new_cookie = "20+ דקות"
+			    break;
+			}
 			Cookies.set('tags', new_cookie)
-			console.log(Cookies.get('tags'));
 	    $('#render-container').html("#{j render 'pages/amounts'}")
 		})
 

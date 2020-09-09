@@ -98,9 +98,10 @@ class GamesController < ApplicationController
     tags = []
     if cookies[:tags]
 			puts "****************************************"
-      cookies[:tags].split(",").each do |id|
-				puts "tag: #{id}"
-        tags << ActsAsTaggableOn::Tag.find_by(name: id)
+      cookies[:tags].split(",").each do |name|
+				puts "tag: #{name}"
+        tags << ActsAsTaggableOn::Tag.find_by(name: name)
+        puts "tags: #{tags}"
         # tags << ActsAsTaggableOn::Tag.find_by(name: id)
       end
     else
