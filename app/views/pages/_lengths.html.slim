@@ -14,33 +14,33 @@ javascript:
 	Cookies.set("question", 0)
 	// console.log(Cookies.get("question"));
 		// console.log(#{Game.all_lengths.pluck(:name).uniq.to_json.html_safe})
-		console.log("#{tags}");
-		$(".send").click(function(event) {
-			var value = parseInt($("input[name='lengthSlider']").val())
-			switch(value) {
-			  case 0:
-			    var new_cookie = "5 דקות"
-			    break;
-			  case 1:
-			    var new_cookie = "10 דקות"
-			    break;
-				case 2:
-			    var new_cookie = "15 דקות"
-			    break;
-				case 3:
-			    var new_cookie = "20+ דקות"
-			    break;
-			}
-			Cookies.set('tags', new_cookie)
-	    $('#render-container').html("#{j render 'pages/amounts'}")
-		})
+		console.log("tags: #{tags}");
+		// $(".send").click(function(event) {
+			// var value = parseInt($("input[name='lengthSlider']").val())
+			// switch(value) {
+			//   case 0:
+			//     var new_cookie = "5 דקות"
+			//     break;
+			//   case 1:
+			//     var new_cookie = "10 דקות"
+			//     break;
+			// 	case 2:
+			//     var new_cookie = "15 דקות"
+			//     break;
+			// 	case 3:
+			//     var new_cookie = "20+ דקות"
+			//     break;
+			// }
+			// Cookies.set('tags', new_cookie)
+	    // $('#render-container').html("#{j render 'pages/amounts'}")
+		// })
 
-	$.ajax({
-	 type: "GET",
-	 dataType: "json",
-	 data: { tags: Cookies.getJSON('tags') },
-	 url: "/filter_tag",
-	 success: function(data){
+	// $.ajax({
+	//  type: "GET",
+	//  dataType: "json",
+	//  data: { tags: Cookies.getJSON('tags') },
+	//  url: "/filter_tag",
+	//  success: function(data){
 		 // if (data[0]) {
 			//  $('#game').html(data[0].name)
 		 // }
@@ -48,5 +48,5 @@ javascript:
 			//  $('#game').html("אין משחקים שתואמים את התגיות שסימנת")
 		 // }
 		 // console.log("ajax");
-	}})
+	// }})
 	var slider = new Slider('#lengthSlider', {});

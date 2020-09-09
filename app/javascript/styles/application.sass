@@ -79,7 +79,11 @@ body
 	color: $secondary
 
 .bg-secondary:hover
-	background-color: $secondary !important
+	background-color: $secondary
+
+button.bg-secondary:hover
+
+		outline: none
 .form-back
 	transform: translate(-50%, 0)
 
@@ -92,6 +96,7 @@ body
 .answer
 	width: 30vw
 	height: 10vw
+	outline: none
 	// box-shadow: -3px 3px 0px 3px #D2BD00
 .form-games
 	// transform: translate(0, -12vh)
@@ -223,71 +228,7 @@ body
 	background: #BABABA
 
 .clicked
-	background: $tertiary
-//
-// // game form
-// .funkyradio
-//   div
-//     clear: both
-//     overflow: hidden
-//
-//   label
-//     width: 100%
-//     border-radius: 3px
-//     border: 1px solid #D1D3D4
-//     font-weight: normal
-//
-//   input
-//     &[type="radio"]:empty, &[type="checkbox"]:empty
-//       display: none
-//
-//     &[type="radio"]:empty ~ label, &[type="checkbox"]:empty ~ label
-//       position: relative
-//       line-height: 2.5em
-//       text-indent: 3.25em
-//       margin-top: 2em
-//       cursor: pointer
-//       -webkit-user-select: none
-//       -moz-user-select: none
-//       -ms-user-select: none
-//       user-select: none
-//
-//     &[type="radio"]:empty ~ label:before, &[type="checkbox"]:empty ~ label:before
-//       position: absolute
-//       display: block
-//       top: 0
-//       bottom: 0
-//       left: 0
-//       content: ''
-//       width: 2.5em
-//       background: #D1D3D4
-//       border-radius: 3px 0 0 3px
-//
-//     &[type="radio"]:hover:not(:checked) ~ label, &[type="checkbox"]:hover:not(:checked) ~ label
-//       color: #888
-//
-//     &[type="radio"]:hover:not(:checked) ~ label:before, &[type="checkbox"]:hover:not(:checked) ~ label:before
-//       content: '\2714'
-//       text-indent: .9em
-//       color: #C2C2C2
-//
-//     &[type="radio"]:checked ~ label, &[type="checkbox"]:checked ~ label
-//       color: #777
-//
-//     &[type="radio"]:checked ~ label:before, &[type="checkbox"]:checked ~ label:before
-//       content: '\2714'
-//       text-indent: .9em
-//       color: #333
-//       background-color: #ccc
-//
-//     &[type="radio"]:focus ~ label:before, &[type="checkbox"]:focus ~ label:before
-//       box-shadow: 0 0 0 3px #999
-//
-// .funkyradio-primary input
-//   &[type="radio"]:checked ~ label:before, &[type="checkbox"]:checked ~ label:before
-//     color: #fff
-//     background-color: #337ab7
-
+		background: $tertiary !important
 
 .new_game, .new_game > *
 	direction: rtl
@@ -326,3 +267,7 @@ span.button-primary
 	margin-top: 2rem
 .hidden
 	display: none
+
+
+.no-outline
+	outline: none !important

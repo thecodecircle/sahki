@@ -101,7 +101,6 @@ class GamesController < ApplicationController
       cookies[:tags].split(",").each do |name|
 				puts "tag: #{name}"
         tags << ActsAsTaggableOn::Tag.find_by(name: name)
-        puts "tags: #{tags}"
         # tags << ActsAsTaggableOn::Tag.find_by(name: id)
       end
     else

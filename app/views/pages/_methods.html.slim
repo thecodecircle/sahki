@@ -1,78 +1,43 @@
 / - tags = Game.all_methods.pluck(:name).uniq.sort_by{|f| f.split(" ")[0].to_i }
 - tags = Game.all_methods
-- tag_ids = Game.all_methods.ids
 h1.question מה עושים במשחק?
 .answers.d-flex.flex-wrap.w-100.justify-content-center
 	- tags.each_with_index do |tag, i|
-		button.answer.bg-secondary.rounded.m-4.d-flex.justify-content-center.align-items-center.border-none value="#{tag.id}"
+		button.answer.no-outline.rounded.m-4.d-flex.justify-content-center.align-items-center.border-none value="#{tag.id}"
 			= tag.name
-/ .d-flex.flex-column.w-100.justify-content-center.align-items-center.mt-5
-/ 	input#methodSlider.slider data-slider-id="methodSlider" name="methodSlider" data-slider-ticks="[0, 1, 2, 3]"  data-slider-ticks-labels='#{tags}' data-slider-max="3" data-slider-min="0" data-slider-step="1" data-slider-value="1"  data-slider-tooltip="hide" type="text"
 button.send.bg-secondary.rounded.m-4.d-flex.justify-content-center.align-items-center.border-none המשך
 javascript:
-	// $(".answer").click(function(event) {
-  //   var new_cookie = Cookies.get('tags')
-  //   var check_cookie = new_cookie.split(",")
-  //   if (!check_cookie.includes($(this).val())) {
-  //     if (new_cookie) {
-  //       new_cookie += "," + $(this).val()
-  //     }
-  //     else {
-  //       new_cookie = $(this).val()
-  //     }
-  //   }
-	// 	Cookies.set('tags', new_cookie)
-	// 	console.log(Cookies.get('tags'));
-  //   $('#render-container').html("#{j render 'pages/styles'}")
-	// })
 	Cookies.set("question", 2)
 
-	// array = [2, 9]
-	// console.log(array);
 	var tags_array = []
 	$(".answer").click(function(event) {
-		var this_value = $(this).val()
+		var content = $(this).html()
 		if ($(this).hasClass('clicked')) {
-			var index = tags_array.indexOf(this_value);
+			var index = tags_array.indexOf(content);
 			tags_array.splice(index, 1);
 
-		}else {
-			if (!tags_array.includes(this_value)) {
-				tags_array.push(this_value)
+		}
+		else {
+			if (!tags_array.includes(content)) {
+				tags_array.push(content)
 			}
-
 		}
 		$(this).toggleClass('clicked');
 
-		// var unique = [...new Set(tags_array)];
-		console.log(tags_array);
+		console.log("tags_array: " + tags_array);
 	});
-	$(".send").click(function(event) {
-		var value = parseInt($("input[name='methodSlider']").val())
-		var tags = #{tag_ids}
-		// console.log("value: " + value);
-		// console.log(tags);
+	function set_tags() {
     var new_cookie = Cookies.get('tags')
-		// console.log(new_cookie);
 		var check_cookie = new_cookie.split(",")
-    if (!check_cookie.includes(tags[value])) {
+    if (!check_cookie.includes(tags_array)) {
       if (new_cookie) {
-        new_cookie += "," + tags[value]
+        new_cookie += "," + tags_array
       }
       else {
-        new_cookie = tags[value]
+        new_cookie = tags_array
       }
     }
 		Cookies.set('tags', new_cookie)
-		console.log(Cookies.get('tags'));
+		console.log("Cookies.get('tags'): " + Cookies.get('tags'));
     $('#render-container').html("#{j render 'pages/styles'}")
-	})
-	$.ajax({
-	 type: "GET",
-	 dataType: "json",
-	 data: { tags: Cookies.getJSON('tags') },
-	 url: "/filter_tag",
-	 success: function(data){
-		 $('#game').html(data[0].name)
-	}})
-	// var slider = new Slider('#methodSlider', {});
+	}
