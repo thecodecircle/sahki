@@ -14,40 +14,37 @@
     - styles = ["כיפי", "מעורר דיון", "אנרגטי", "עצוב"]
     - methods = ["לא", "הבנתי", "מה", "זה"]
     / = f.input :length_list, collection: lengths, label: "כמה זמן לוקח לשחק את המשחק?", as: :checkboxes
-    .col-md-4
-      .col-md-6
-        .label כמה זמן לוקח לשחק את המשחק
-        .funkyradio
-          = f.collection_check_boxes :length_list, lengths, :to_s, :to_s do |b|
-            = b.label class: "funkyradio-primary mx-2 d-block p-4"
-          .funkyradio-primary
-            input#checkbox2 checked="" name="checkbox" type="checkbox"
-            label for="checkbox2"  Second Option primary
-          .funkyradio-success
-            input#checkbox3 checked="" name="checkbox" type="checkbox"
-            label for="checkbox3"  Third Option success
-          .funkyradio-danger
-            input#checkbox4 checked="" name="checkbox" type="checkbox"
-            label for="checkbox4"  Fourth Option danger
-          .funkyradio-warning
-            input#checkbox5 checked="" name="checkbox" type="checkbox"
-            label for="checkbox5"  Fifth Option warning
-          .funkyradio-info
-            input#checkbox6 checked="" name="checkbox" type="checkbox"
-            label for="checkbox6"  Sixth Option info
+    / .col-md-4
+    /   .col-md-6
+    /     .label כמה זמן לוקח לשחק את המשחק
+    /     .funkyradio
+    /       = f.collection_check_boxes :length_list, lengths, :to_s, :to_s do |b|
+    /         / = b.label class: "funkyradio-primary mx-2 d-block p-4"
+    /         .funkyradio-primary
+    /           input#checkbox2 checked="false" name="#{}" type="checkbox"
+    /           = b.label for: "checkbox2"
 
     .label כמה זמן לוקח לשחק את המשחק
-    = f.collection_check_boxes :length_list, lengths, :to_s, :to_s do |b|
-      = b.label class: "btn btn-primary mx-2 d-block p-4"
+    = f.collection_check_boxes :length_list, lengths, :to_s, :to_s, item_wrapper_class: 'button-primary button-primary-off'
     .label כמה חניכות יש לך?
-    = f.collection_check_boxes :amount_list, amounts, :to_s, :to_s do |b|
-      = b.label class: "btn btn-primary mx-2 d-block p-4"
+    = f.collection_check_boxes :amount_list, amounts, :to_s, :to_s, item_wrapper_class: 'button-primary button-primary-off'
     .label מאפייני המשחק
-    = f.collection_check_boxes :style_list, styles, :to_s, :to_s do |b|
-      = b.label class: "btn btn-primary mx-2 d-block p-4"
+    = f.collection_check_boxes :style_list, styles, :to_s, :to_s, item_wrapper_class: 'button-primary button-primary-off'
     .label מתודה
-    = f.collection_check_boxes :method_list, methods, :to_s, :to_s do |b|
-      = b.label class: "btn btn-primary mx-2 d-block p-4"
+    = f.collection_check_boxes :method_list, methods, :to_s, :to_s, item_wrapper_class: 'button-primary button-primary-off'
+    / .label כמה זמן לוקח לשחק את המשחק
+    / .flex
+    /   = f.collection_check_boxes :length_list, lengths, :to_s, :to_s do |b|
+    /     = b.label class: "btn btn-outline-primary mx-2 d-block p-4"
+    / .label כמה חניכות יש לך?
+    / = f.collection_check_boxes :amount_list, amounts, :to_s, :to_s do |b|
+    /   = b.label class: "btn btn-outline-primary mx-2 d-block p-4"
+    / .label מאפייני המשחק
+    / = f.collection_check_boxes :style_list, styles, :to_s, :to_s do |b|
+    /   = b.label class: "btn btn-outline-primary mx-2 d-block p-4"
+    / .label מתודה
+    / = f.collection_check_boxes :method_list, methods, :to_s, :to_s do |b|
+    /   = b.label class: "btn btn-outline-primary mx-2 d-block p-4"
 
     / = f.input :agriculture,   collection: agrihash, label_method: :second, value_method: :first
     / form.select :status, Production.statuses.keys.to_a
@@ -55,7 +52,17 @@
     = f.input :suggested_phone, label: "טלפון המציעה", required: true
     = f.input :hearts, label: "לבבות" if session[:current_admin_id]
     = f.input :shares, label: "שיתופים" if session[:current_admin_id]
+    / = f.input :status, input_html: {value: "pending"}, as::hidden unless session[:current_admin_id]
+    = f.input :status, collection: Game.statuses.keys.to_a, include_blank: false, label: "סטטוס", wrapper_html: {class: "hidden"} unless session[:current_admin_id]
     = f.input :status, collection: Game.statuses.keys.to_a, include_blank: false, label: "סטטוס" if session[:current_admin_id]
 
   .form-actions
     = f.button :submit, "שליחת המשחק לאישור"
+javascript:
+  $(document).ready(function() {
+    $("span").click(function(event) {
+      $(this).toggleClass('button-primary-off button-primary-on');
+
+    });
+
+  });

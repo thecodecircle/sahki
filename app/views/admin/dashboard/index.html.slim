@@ -11,6 +11,7 @@
             th Hearts
             th Shares
             th Status
+            th Approve
             th Suggested name
             th Suggested phone
             th
@@ -27,6 +28,7 @@
               td id="show_hearts_#{game.id}" = game.hearts
               td id="show_shares_#{game.id}" = game.shares
               td = game.status
+              td = link_to "Approve game", approve_game_path(id: game.id)
               td = game.suggested_name
               td = game.suggested_phone
               td = link_to 'Show', game
@@ -34,6 +36,7 @@
               td = link_to 'Destroy', game, data: { confirm: 'Are you sure?' }, method: :delete
               td = link_to 'Heart', heart_it_path(id: game), class: "heart", id: "heart-#{game.id}", remote: true
               td = link_to 'Share', share_it_path(id: game), class: "share", id: "share-#{game.id}", remote: true
+
       #results
 
       br
